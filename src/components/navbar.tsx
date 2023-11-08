@@ -4,7 +4,7 @@ import Image from "next/image";
 import { HiOutlineMenuAlt3 } from "react-icons/hi";
 import { AiOutlineClose } from "react-icons/ai";
 
-const Navbar = (defaultform : boolean) => {
+const Navbar = ({ defaultform = true }) => {
   const [scrollY, setScrollY] = useState(0);
   const [isFaded, setIsFaded] = useState(false);
   const [isOpen, setIsOpen] = useState(true);
@@ -31,12 +31,18 @@ const Navbar = (defaultform : boolean) => {
   }, []);
 
   useEffect(() => {
-    setIsFaded(scrollY >= 40);
+    if(defaultform===true)
+    {
+      setIsFaded(true)
+    }
+    else{
+      setIsFaded(scrollY >= 40);
+    }
   }, [scrollY]);
 
   return (
     <>
-      <div className="w-full md:h-[5vh]"></div>
+    {defaultform? null: <div className="w-full md:h-[5vh]"></div>}
       <div className="sticky top-0">
         <div
           className=" absolute w-full h-[70px] top-0 bg-white"
