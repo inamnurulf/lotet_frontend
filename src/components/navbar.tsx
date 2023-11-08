@@ -41,7 +41,7 @@ const Navbar = ({ defaultform = true }) => {
   return (
     <>
       {defaultform ? null : <div className="w-full md:h-[5vh]"></div>}
-      <div className="sticky top-0">
+      <div className="sticky top-0 w-full">
         <div
           className=" absolute w-full h-[70px] top-0 bg-white"
           style={fadeEffect}
