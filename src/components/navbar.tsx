@@ -31,18 +31,16 @@ const Navbar = ({ defaultform = true }) => {
   }, []);
 
   useEffect(() => {
-    if(defaultform===true)
-    {
-      setIsFaded(true)
-    }
-    else{
+    if (defaultform === true) {
+      setIsFaded(true);
+    } else {
       setIsFaded(scrollY >= 40);
     }
   }, [scrollY]);
 
   return (
     <>
-    {defaultform? null: <div className="w-full md:h-[5vh]"></div>}
+      {defaultform ? null : <div className="w-full md:h-[5vh]"></div>}
       <div className="sticky top-0">
         <div
           className=" absolute w-full h-[70px] top-0 bg-white"
@@ -59,13 +57,31 @@ const Navbar = ({ defaultform = true }) => {
             />
           </div>
           <div className="justify-between hidden md:flex">
-            <a href="/" className="text-xl mx-3 hover:bg-primary hover:text-white px-3 py-2 rounded rounded-xl font-semibold">Home</a>
-            <a href="/kerjapraktik" className="text-xl mx-3 hover:bg-primary hover:text-white px-3 py-2 rounded rounded-xl font-semibold">Kerja Praktik</a>
-            <a href="/seminar" className="text-xl mx-3 hover:bg-primary hover:text-white px-3 py-2 rounded rounded-xl font-semibold">Seminar</a>
+            <a
+              href="/home"
+              className="text-xl mx-3 hover:bg-primary hover:text-white px-3 py-2 rounded rounded-xl font-semibold"
+            >
+              Home
+            </a>
+            <a
+              href="/kerjapraktik"
+              className="text-xl mx-3 hover:bg-primary hover:text-white px-3 py-2 rounded rounded-xl font-semibold"
+            >
+              Kerja Praktik
+            </a>
+            <a
+              href="/seminar"
+              className="text-xl mx-3 hover:bg-primary hover:text-white px-3 py-2 rounded rounded-xl font-semibold"
+            >
+              Seminar
+            </a>
           </div>
-          <a href="/signIn" className="w-[150px] text-center justify-center hidden md:flex ">
+          <a
+            href="/signIn"
+            className="w-[150px] text-center justify-center hidden md:flex "
+          >
             <div className="hover:bg-primary hover:text-white px-3 py-2 rounded rounded-xl font-semibold text-xl">
-            Sign In
+              Sign In
             </div>
           </a>
           <div className="text-3xl md:hidden px-3 ">
@@ -79,10 +95,30 @@ const Navbar = ({ defaultform = true }) => {
         {!isOpen ? (
           <div className="w-full items-center bg-white">
             <div className=" z-[100] w-full md:w-[90vw] text-right md:hidden flex justify-center flex-col items-center p-3">
-              <div className="mx-3 hover:bg-primary hover:text-white w-full p-3 border border-2">Home</div>
-              <div className="mx-3 hover:bg-primary hover:text-white w-full p-3 border border-2">Kerja Praktik</div>
-              <div className="mx-3 hover:bg-primary hover:text-white w-full p-3 border border-2">Seminar</div>
-              <div className="mx-3 hover:bg-primary hover:text-white w-full p-3 border border-2">Sign In</div>
+              <a
+                href="/home"
+                className="mx-3 hover:bg-primary hover:text-white w-full p-3 border border-2"
+              >
+                Home
+              </a>
+              <a
+                href="/kerjapraktik"
+                className="mx-3 hover:bg-primary hover:text-white w-full p-3 border border-2"
+              >
+                Kerja Praktik
+              </a>
+              <a
+                href="/seminar"
+                className="mx-3 hover:bg-primary hover:text-white w-full p-3 border border-2"
+              >
+                Seminar
+              </a>
+              <a
+                href="/signIn"
+                className="mx-3 hover:bg-primary hover:text-white w-full p-3 border border-2"
+              >
+                Sign In
+              </a>
             </div>
           </div>
         ) : null}
