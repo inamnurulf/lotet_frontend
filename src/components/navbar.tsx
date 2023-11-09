@@ -39,14 +39,14 @@ const Navbar = ({ defaultform = true }) => {
   }, [scrollY]);
 
   return (
-    <div className="absolute w-full h-full">
-      {defaultform ? null : <div className="w-full md:h-[5vh]"></div>}
-      <div className="sticky top-0 w-full">
+    <div className="absolute w-0 self-start h-full z-[100]">
+      {defaultform ? null : <div className="w-screen md:h-[5vh]"></div>}
+      <div className="sticky top-0 w-screen ">
         <div
-          className=" absolute w-full h-[70px] top-0 bg-white z-[100]"
+          className=" absolute w-screen h-[70px] top-0 bg-white"
           style={fadeEffect}
         ></div>
-        <div className="relative bg-white w-[full] md:w-[90vw] mx-auto p-2 h-[70px]  md:rounded-full top-0 flex justify-between items-center z-[100]">
+        <div className="relative bg-white w-screen md:w-[90vw] mx-auto p-2 h-[70px]  md:rounded-full top-0 flex justify-between items-center">
           <div>
             <Image
               src={"./Logo.svg"}
@@ -59,19 +59,19 @@ const Navbar = ({ defaultform = true }) => {
           <div className="justify-between hidden md:flex">
             <a
               href="/home"
-              className="text-xl text-primary mx-5 hover:bg-primary hover:text-white px-3  rounded rounded-xl font-semibold"
+              className="lg:text-xl text-primary mx-5 hover:bg-primary hover:text-white lg:px-3  rounded rounded-xl font-semibold"
             >
               Home
             </a>
             <a
               href="/kerjapraktik"
-              className="text-xl text-primary mx-5 hover:bg-primary hover:text-white px-3  rounded rounded-xl font-semibold"
+              className="lg:text-xl text-primary mx-5 hover:bg-primary hover:text-white lg:px-3  rounded rounded-xl font-semibold"
             >
               Kerja Praktik
             </a>
             <a
               href="/seminar"
-              className="text-xl text-primary mx-5 hover:bg-primary hover:text-white px-3  rounded rounded-xl font-semibold"
+              className="lg:text-xl text-primary mx-5 hover:bg-primary hover:text-white lg:px-3  rounded rounded-xl font-semibold"
             >
               Seminar
             </a>
@@ -80,7 +80,7 @@ const Navbar = ({ defaultform = true }) => {
             href="/signIn"
             className="w-[150px] text-primary text-center justify-center hidden md:flex "
           >
-            <div className="hover:bg-primary hover:text-white px-3  rounded rounded-xl font-semibold text-xl">
+            <div className="hover:bg-primary hover:text-white px-3  rounded rounded-xl font-semibold lg:text-xl">
               Sign In
             </div>
           </a>

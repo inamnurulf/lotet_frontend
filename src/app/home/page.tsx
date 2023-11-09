@@ -27,12 +27,12 @@ const Home = () => {
       <Navbar defaultform={false} />
       <div className="md:flex">
         <div className="md:w-[50vw] flex flex-col justify-center items-start min-h-screen">
-          <div className="left-[5%] relative">
+          <div className="left-[15%] relative">
             <div className="flex items-end">
-              <div className="text-white text-3xl md:text-4xl lg:text-5xl font-semibold">
+              <div className="text-white text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-semibold">
                 Pengen
               </div>
-              <div className="text-white text-4xl md:text-5xl lg:text-6xl font-extrabold px-3 text-secondary">
+              <div className="text-white text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold px-3 text-secondary">
                 <span id="animated-text"></span>
               </div>
             </div>
