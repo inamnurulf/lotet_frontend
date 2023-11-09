@@ -9,7 +9,7 @@ import CarousellCard from './atom/carousellCard';
 
 const Carousell = () => {
   return (
-    <div className='w-[80vw] h-[20vh]'>
+    <div className='w-[95vw] md:w-[30vw] h-[45vh]'>
         <Swiper
           spaceBetween={10}
           centeredSlides={true}
@@ -21,7 +21,7 @@ const Carousell = () => {
             clickable: true,
           }}
           modules={[Autoplay, Pagination]}
-          className="mySwiper"
+          className="mySwiper rounded rounded-md'"
         >
             <SwiperSlide>
               <CarousellCard/>
