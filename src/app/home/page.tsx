@@ -33,7 +33,7 @@ const Home = () => {
                 Pengen
               </div>
               <div className="text-white text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold px-3 text-secondary">
-                <span id="animated-text"></span>
+                <span id="animated-text" className="text-secondary"></span>
               </div>
             </div>
             <div className="text-white text-xl py-3">Tetep kudu cari KP dulu !</div>
