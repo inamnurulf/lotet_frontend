@@ -1,8 +1,31 @@
+import Image from "next/image";
 
 export default function Home() {
   return (
     <main>
-      This is Landing Page
+      <div className="w-screen h-screen bg-primary justify-center items-center flex flex-col">
+        <div className="w-96 h-52 text-center text-white text-4xl font-bold">
+          Welcome to
+          <Image
+             src={"./Logo-wht.svg"}
+             width={155}
+             alt="Logo"
+             height={64}
+             className="w-80 h-44"
+          />
+          
+          </div>
+        <div className="mt-8">
+          <a
+            href="/auth/signIn"
+            className="text-white text-xl font-semibold hover:underline"
+          >
+            Start
+          </a>
+        </div>
+      </div>
+      {/* This is Landing Page */}
     </main>
+    
   )
 }
