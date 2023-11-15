@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { HiOutlineMenuAlt3 } from "react-icons/hi";
 import { AiOutlineClose } from "react-icons/ai";
+import Link from "next/link";
 
 const Navbar = ({ defaultform = true }) => {
   const [scrollY, setScrollY] = useState(0);
@@ -57,33 +58,33 @@ const Navbar = ({ defaultform = true }) => {
             />
           </div>
           <div className="justify-between hidden md:flex">
-            <a
+            <Link
               href="/home"
               className="lg:text-xl text-primary mx-5 hover:bg-primary hover:text-white lg:px-3  rounded rounded-xl font-semibold"
             >
               Home
-            </a>
-            <a
+            </Link>
+            <Link
               href="/kerjapraktik"
               className="lg:text-xl text-primary mx-5 hover:bg-primary hover:text-white lg:px-3  rounded rounded-xl font-semibold"
             >
               Kerja Praktik
-            </a>
-            <a
+            </Link>
+            <Link
               href="/seminar"
               className="lg:text-xl text-primary mx-5 hover:bg-primary hover:text-white lg:px-3  rounded rounded-xl font-semibold"
             >
               Seminar
-            </a>
+            </Link>
           </div>
-          <a
+          <Link
             href="/signIn"
             className="w-[150px] text-primary text-center justify-center hidden md:flex "
           >
             <div className="hover:bg-primary hover:text-white px-3  rounded rounded-xl font-semibold lg:text-xl">
               Sign In
             </div>
-          </a>
+          </Link>
           <div className="text-3xl md:hidden px-3 ">
             {isOpen ? (
               <HiOutlineMenuAlt3 onClick={handleNavbar} />
