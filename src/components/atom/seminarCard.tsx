@@ -1,19 +1,40 @@
+'use client';
+import Image from "next/image";
+
 
 interface SeminarCardProps {
   title: string;
   date: string;
   location: string;
-  description: string;
 }
 
-const SeminarCard: React.FC<SeminarCardProps> = ({ title, date, location, description }) => {
+const SeminarCard: React.FC<SeminarCardProps> = ({ title, date, location }) => {
+  const onclick = () =>{
+    alert("click")
+  }
   return (
-    <div className="max-w-md mx-auto bg-white rounded-xl overflow-hidden shadow-lg my-4">
-      <div className="p-4">
-        <h2 className="font-bold text-xl mb-2">{title}</h2>
-        <p className="text-gray-600 mb-2">{date}</p>
-        <p className="text-gray-600 mb-2">{location}</p>
-        <p className="text-gray-800">{description}</p>
+    <div className="max-w-md min-w-full md:min-w-0 bg-white rounded-xl overflow-hidden shadow-lg mx-4 my-4 hover:shadow-2xl transition duration-300 cursor-pointer" onClick={onclick}>
+      <div className="p-0">
+        <div>
+          <Image
+            src = {"./Logo.svg"}
+            alt = "Search"
+            width={386}
+            height={200}
+          />
+        </div>
+        <h2 className="font-bold text-xl mb-2 px-4">{title}</h2>
+        <div className="flex mb-2 items-start space-x-4 px-4">
+          <div className="">
+            <p className="text-gray-600 mb-2">{date}</p>
+          </div>
+          <div>
+            <p className="text-gray-600 mb-2">{location}</p>
+          </div>
+          
+        </div>
+        
+        
       </div>
     </div>
   );
