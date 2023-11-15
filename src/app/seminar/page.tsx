@@ -1,9 +1,12 @@
+import Navbar from '@/components/navbar'
+import SearchBar from '@/components/searchBar'
 import React from 'react'
 
 const Seminar = () => {
   return (
     <div>
-      This is seminar page
+      <Navbar defaultform = {true}></Navbar>
+      <SearchBar/>
     </div>
   )
 }
