@@ -8,14 +8,12 @@ const SignIn = () => {
                 <h2 className="text-center text-2xl font-bold mb-4">Login</h2>
                 <div className="mb-4">
                     <label className="block text-gray-700 font-semibold mb-2">
-                    {/* for="email" */}
                         Email
                     </label>
                     <input className="appearance-none bg-zinc-300 border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" type="email"></input>
                 </div>
                 <div className="mb-6">
                     <label className="block text-gray-700 font-semibold mb-2" >
-                    {/* for="password" */}
                         Password
                     </label>
                     <input className="appearance-none bg-zinc-300 border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password"></input>
@@ -29,7 +27,6 @@ const SignIn = () => {
                         Sign Up
                       </a>
                     </p>
-                    
                 </div>
             </form>
         </div>

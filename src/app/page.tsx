@@ -24,7 +24,6 @@ export default function Home() {
           </a>
         </div>
       </div>
-      {/* This is Landing Page */}
     </main>
     
   )
