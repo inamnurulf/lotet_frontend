@@ -15,9 +15,9 @@ export default function Home() {
           />
           
           </div>
-        <div className="mt-8">
+        <div className="mt-8 transform transition-transform hover:scale-105">
           <a
-            href="/auth/signIn"
+            href="/auth/login"
             className="text-white text-xl font-semibold hover:underline"
           >
             Start

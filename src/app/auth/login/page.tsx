@@ -25,7 +25,7 @@ const SignIn = () => {
                         Login
                     </a>
                     <p>Don't have an account? 
-                      <a className="inline-block mt-5 align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="/auth/signUp">
+                      <a className="inline-block mt-5 ml-1 align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="/auth/signUp">
                         Sign Up
                       </a>
                     </p>
