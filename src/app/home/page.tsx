@@ -23,7 +23,7 @@ const Home = () => {
     };
   }, []);
   return (
-    <section className="flex items-center flex-col overflow-hidden bg-primary min-h-screen">
+    <section className="flex items-center flex-col  bg-primary">
       <Navbar defaultform={false} />
       <div className="md:flex">
         <div className="md:w-[50vw] flex flex-col justify-center items-start min-h-screen">
