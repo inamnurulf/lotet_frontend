@@ -78,11 +78,11 @@ const Navbar = ({ defaultform = true }) => {
             </Link>
           </div>
           <Link
-            href="/signIn"
+            href="/auth/login"
             className="w-[150px] text-primary text-center justify-center hidden md:flex "
           >
             <div className="hover:bg-primary hover:text-white px-3  rounded rounded-xl font-semibold lg:text-xl">
-              Sign In
+              Login
             </div>
           </Link>
           <div className="text-3xl md:hidden px-3 ">
@@ -115,10 +115,10 @@ const Navbar = ({ defaultform = true }) => {
                 Seminar
               </a>
               <a
-                href="/signIn"
+                href="/auth/login"
                 className="mx-3 hover:bg-primary hover:text-white w-full p-3 border border-2"
               >
-                Sign In
+                Login
               </a>
             </div>
           </div>
