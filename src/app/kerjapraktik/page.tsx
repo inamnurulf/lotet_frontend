@@ -1,4 +1,4 @@
-import KPCard from '@/components/atom/kpCard'
+import KPCard from '@/components/kpCard'
 import Navbar from '@/components/navbar'
 import SearchBar from '@/components/searchBar'
 import React from 'react'
