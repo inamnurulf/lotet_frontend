@@ -1,5 +1,6 @@
 'use client';
 import Image from "next/image";
+import Link from "next/link";
 
 
 interface SeminarCardProps {
@@ -13,8 +14,8 @@ const SeminarCard: React.FC<SeminarCardProps> = ({ title, date, location }) => {
     alert("click")
   }
   return (
-    <div className="max-w-md min-w-full md:min-w-0 bg-white rounded-xl overflow-hidden shadow-lg mx-4 my-4 hover:shadow-2xl transition duration-300 cursor-pointer" onClick={onclick}>
-      <div className="p-0">
+    <div className="max-w-md min-w-full md:min-w-0 bg-white rounded-xl overflow-hidden shadow-lg mx-4 my-4 hover:shadow-2xl transition duration-300 cursor-pointer">
+      <Link href={"./seminar/1"}>
         <div>
           <Image
             src = {"./Logo.svg"}
@@ -35,7 +36,7 @@ const SeminarCard: React.FC<SeminarCardProps> = ({ title, date, location }) => {
         </div>
         
         
-      </div>
+      </Link>
     </div>
   );
 };
