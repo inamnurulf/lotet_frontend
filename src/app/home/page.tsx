@@ -1,5 +1,6 @@
 "use client";
 import Carousell from "@/components/carousell";
+import Footer from "@/components/footer";
 import Navbar from "@/components/navbar";
 import React, { useRef, useEffect } from "react";
 import Typed from "typed.js";
@@ -10,7 +11,7 @@ const Home = () => {
   useEffect(() => {
     const options = {
       strings: ["CUMLAUDE", "Lulus Aja !"],
-      typeSpeed: 200,
+      typeSpeed: 100,
       loop: true,
     };
 
@@ -23,7 +24,7 @@ const Home = () => {
     };
   }, []);
   return (
-    <section className="flex items-center flex-col  bg-primary">
+    <section className="flex items-center flex-col bg-primary max-h-screen">
       <Navbar defaultform={false} />
       <div className="md:flex">
         <div className="md:w-[50vw] flex flex-col justify-center items-start min-h-screen">
@@ -36,7 +37,9 @@ const Home = () => {
                 <span id="animated-text" className="text-secondary"></span>
               </div>
             </div>
-            <div className="text-white text-xl py-3">Tetep kudu cari KP dulu !</div>
+            <div className="text-white text-xl py-3">
+              Tetep kudu cari KP dulu !
+            </div>
           </div>
         </div>
         <div className="bg-secondary w-screen md:w-[50vw] min-h-screen flex items-center">
@@ -48,6 +51,7 @@ const Home = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </section>
   );
 };
