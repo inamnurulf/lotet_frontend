@@ -7,7 +7,7 @@ import React from 'react'
 const Seminar = () => {
   return (
     <section className='flex items-center flex-col overflow-auto bg-primary min-h-screen'>
-      <Navbar defaultform = {false}></Navbar>
+      <Navbar defaultform = {true}></Navbar>
 
       <div className='flex flex-col justify-center'>
         <div className='mt-10 w-1/3 mx-auto min-w-fit md:min-w-0 flex justify-center'>

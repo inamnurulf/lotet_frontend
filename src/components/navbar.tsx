@@ -47,7 +47,7 @@ const Navbar = ({ defaultform = true }) => {
           className=" absolute w-screen h-[70px] top-0 bg-white"
           style={fadeEffect}
         ></div>
-        <div className="relative bg-white w-screen md:w-[90vw] mx-auto p-2 h-[70px]  md:rounded-full top-0 flex justify-between items-center">
+        <div className={`relative bg-white w-screen ${defaultform ? " w-full " : " md:w-[90vw] md:rounded-full "}  mx-auto p-2 h-[70px]  top-0 flex justify-between items-center`}>
           <div>
             <Image
               src={"./Logo.svg"}
