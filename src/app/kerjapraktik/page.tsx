@@ -6,7 +6,7 @@ import React from 'react'
 const KerjaPraktik = () => {
   return (
     <div className='flex items-center flex-col overflow-hidden bg-primary min-h-screen'>
-      <Navbar defaultform = {true}></Navbar>
+      <Navbar defaultform = {false}></Navbar>
       
       <div className='mt-8 w-1/3 min-w-fit md:min-w-0 flex justify-center'>
         <SearchBar></SearchBar>

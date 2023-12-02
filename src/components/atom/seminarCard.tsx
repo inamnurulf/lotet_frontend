@@ -2,19 +2,19 @@
 import Image from "next/image";
 import Link from "next/link";
 
-
 interface SeminarCardProps {
+  key: string,
   title: string;
   date: string;
   location: string;
 }
 
-const SeminarCard: React.FC<SeminarCardProps> = ({ title, date, location }) => {
+const SeminarCard: React.FC<SeminarCardProps> = ({ key, title, date, location }) => {
   const onclick = () =>{
     alert("click")
   }
   return (
-    <div className="max-w-md min-w-full md:min-w-0 bg-white rounded-xl overflow-hidden shadow-lg mx-4 my-4 hover:shadow-2xl transition duration-300 cursor-pointer">
+    <div key = {key} className="max-w-md min-w-full md:min-w-0 bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl hover:scale-105 transition duration-300 cursor-pointer">
       <Link href={"./seminar/1"}>
         <div>
           <Image
