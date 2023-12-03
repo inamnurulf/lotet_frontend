@@ -17,25 +17,23 @@ const Profile = () => {
         {/* Left part */}
         <div className=" relative w-1/5 bg-[#0D6FBC]">
           {/* Content for the left part */}
-          <div className="relative inset-x-0 top-14 mx-auto h-[75px] w-[70%] bg-black text-center">
-            <div className="relative top-0 h-[35px] w-full  bg-black ">
-                <div className="text-lg pt-1 font-bold text-white">NamaNamaNama</div>
+          <div className="relative inset-x-0 top-14 mx-auto h-[75px] w-full bg-parent text-center">
+            <div className="flex justify-center h-[35px] w-full  bg-parent ">
+                <div className="flex items-center text-xs font-bold text-white md:text-xl">NamaNamaNama</div>
             </div>
-            <div className="flex bottom-0 h-[35px] w-full  bg-black">
-                <div className="justify-items-center text-sm font-bold text-white">NimNimNim</div>
+            <div className="flex justify-center h-[35px] w-full  bg-parent">
+                <div className="flex items-center text-xs font-bold text-white md:text-xl">NimNimNim</div>
 
             </div>
           </div>
           
-          <div className="absolute inset-x-0 bottom-[80px] rounded-xl mx-auto h-[40px] w-[70%] bg-[#0D6FBC] ">
-
-          </div>
+          
           <button className="absolute inset-x-0 bottom-6 rounded-xl mx-auto h-[40px] w-[60%] bg-[#0D6FBC] flex flex-row hover:bg-[#529cd5] ">
             <IoLogOutOutline 
                 size='30px'
-                className='ml-2 mt-1.5'
+                className='ml-2 mt-1.5 md:max-w-1/4'
             />
-            <text className="flex-1 mt-1.5 mx-2 font-bold md:text-xl">Logout</text>
+            <text className=" my-auto mx-auto font-bold text-xs md:text-xl">Logout</text>
           
           </button>
         </div>
