@@ -10,9 +10,14 @@ import CarousellCard from "./atom/carousellCard";
 const Carousell = () => {
   const [data, setData] = useState([]);
   useEffect(() => {
-    fetch(process.env.NEXT_PUBLIC_BACKEND_URL + "/carousell")
+    fetch(process.env.NEXT_PUBLIC_BACKEND_URL + "custom/carousell")
       .then((response) => response.json())
-      .then((responseData) => setData(responseData))
+      .then((responseData) => {
+        setData(responseData);
+      })
+      .then(() => {
+        console.log(data);
+      })
       .catch((error) => {
         console.log(error);
       });
@@ -35,20 +40,15 @@ const Carousell = () => {
         {data.length !== 0 ? (
           data.map((rows: any) => (
             <SwiperSlide key={rows._id}>
-              <CarousellCard />
+              <CarousellCard rows={rows} />
             </SwiperSlide>
           ))
         ) : (
-          <div className="animate-pulse w-[95vw] md:w-[30vw] h-[45vh] bg-slate-300 rounded rounded-md flex justify-center items-center text-white"> No data yet</div>
+          <div className="animate-pulse w-[95vw] md:w-[30vw] h-[45vh] bg-slate-300 rounded rounded-md flex justify-center items-center text-white">
+            {" "}
+            No data yet
+          </div>
         )}
-
-        {data.map((rows: any) => {
-          return (
-            <SwiperSlide key={rows._id}>
-              <CarousellCard />
-            </SwiperSlide>
-          );
-        })}
       </Swiper>
     </div>
   );

@@ -1,9 +1,9 @@
 import React from 'react'
 
-const CarousellCard = () => {
+const CarousellCard = (row:any) => {
   return (
-    <div className='animate-pulse w-[95vw] md:w-[30vw] h-[45vh] bg-slate-300 rounded rounded-md'>
-      
+    <div className='w-[95vw] md:w-[30vw] h-[45vh] bg-slate-300 rounded rounded-md'>
+      {row?.rows?.title}
     </div>
   )
 }
