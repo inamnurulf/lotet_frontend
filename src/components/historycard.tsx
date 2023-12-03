@@ -10,7 +10,7 @@ const HistoryCard : React.FC = () => {
     <div className="text-primary bg-white p-4 my-3 rounded-lg md:max-w-[95%] mx-auto  overflow-hidden">
       <div className="flex justify-between w-full">
         <div className="max-w-[100%]">
-          <h2 className="md:text-xl font-bold"></h2>
+          <h2 className="md:text-xl font-bold">JudulJudulJudul</h2>
 
         </div>
         <div className="flex md:text-3xl items-center">

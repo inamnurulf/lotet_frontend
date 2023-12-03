@@ -1,6 +1,7 @@
 "use client";
 import Navbar from "@/components/navbar"
 import HistoryCard from "@/components/historycard";
+import { IoLogOutOutline } from "react-icons/io5";
 
 const Profile = () => {
     return (
@@ -14,15 +15,29 @@ const Profile = () => {
       {/* Bottom part */}
       <div className="flex flex-1">
         {/* Left part */}
-        <div className="flex flex-row w-1/5 bg-green-500">
+        <div className=" relative w-1/5 bg-[#0D6FBC]">
           {/* Content for the left part */}
-          <div className="flex items-end rounded-xl mx-auto h-[40px] w-[70%] bg-red-950 ">
-            
+          <div className="relative inset-x-0 top-14 mx-auto h-[75px] w-[70%] bg-black text-center">
+            <div className="relative top-0 h-[35px] w-full  bg-black ">
+                <div className="text-lg pt-1 font-bold text-white">NamaNamaNama</div>
+            </div>
+            <div className="flex bottom-0 h-[35px] w-full  bg-black">
+                <div className="justify-items-center text-sm font-bold text-white">NimNimNim</div>
+
+            </div>
           </div>
-          <div className="flex items-end rounded-xl mx-auto h-[40px] w-[70%] bg-red-950 ">
-            
+          
+          <div className="absolute inset-x-0 bottom-[80px] rounded-xl mx-auto h-[40px] w-[70%] bg-[#0D6FBC] ">
+
           </div>
-         
+          <button className="absolute inset-x-0 bottom-6 rounded-xl mx-auto h-[40px] w-[60%] bg-[#0D6FBC] flex flex-row hover:bg-[#529cd5] ">
+            <IoLogOutOutline 
+                size='30px'
+                className='ml-2 mt-1.5'
+            />
+            <text className="flex-1 mt-1.5 mx-2 font-bold md:text-xl">Logout</text>
+          
+          </button>
         </div>
 
         {/* Right part */}
