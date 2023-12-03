@@ -5,19 +5,23 @@ import { BiEdit } from "react-icons/bi";
 
 
 
-const HistoryCard : React.FC = () => {
+const HistoryCard = ({
+  display_text,
+  handleDeleteButton,
+  temp
+}:any) => {
   return (
     <div className="text-primary bg-white p-4 my-3 rounded-lg md:max-w-[95%] mx-auto  overflow-hidden">
       <div className="flex justify-between w-full">
         <div className="max-w-[100%]">
-          <h2 className="md:text-xl font-bold">JudulJudulJudul</h2>
+          <h2 className="md:text-xl font-bold">{display_text}</h2>
 
         </div>
         <div className="flex md:text-3xl items-center">
           <div></div>
           <AiOutlineDelete
             className="hover:bg-primary hover:text-white rounded-md"
-            onClick={() =>console.log('Delete Button Clicked') }
+            onClick={handleDeleteButton}
           />
           <BiEdit
             className="hover:bg-primary hover:text-white rounded-md"
