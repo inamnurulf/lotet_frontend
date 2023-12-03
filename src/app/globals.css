@@ -10,3 +10,33 @@
     background-size: cover;
     background-image: url("/authBackground.svg");
   }
+
+@layer utilities {
+  .scrollbar::-webkit-scrollbar {
+    width: 10px;
+    height: 20px;
+  }
+
+  .scrollbar::-webkit-scrollbar-track {
+    border-radius: 100vh;
+    background: #27b5e8;
+  }
+
+  .scrollbar::-webkit-scrollbar-thumb {
+    background: #198de5;
+    border-radius: 100vh;
+    border: 2px solid #ffffff73;
+  }
+
+  .scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #18AFE6;
+  }
+}
+
+@layer base {
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}
