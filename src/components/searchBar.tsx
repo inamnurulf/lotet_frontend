@@ -11,7 +11,7 @@ const SearchBar = () => {
     setSearchTerm(e.target.value);
   };
   return  (
-    <div className="container mx-4 mt-20">
+    <div className="container mt-20">
       <div className="flex justify-start space-x-4 bg-gray-100 border-gray-300 rounded-lg px-4 shadow-md">
         <div className="flex items-center bg-gray-100">
           <Image 
@@ -30,9 +30,6 @@ const SearchBar = () => {
             placeholder="Search"
           />
         </div>
-        {/* {searchTerm && (
-          <div className="mt-10 text-2xl">Search term: {searchTerm}</div>
-        )} */}
       </div>
     </div>
   );
