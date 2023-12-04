@@ -8,6 +8,7 @@ import { BiEdit } from "react-icons/bi";
 const HistoryCard = ({
   display_text,
   handleDeleteButton,
+  handleEditButton,
   temp
 }:any) => {
   return (
@@ -25,7 +26,8 @@ const HistoryCard = ({
           />
           <BiEdit
             className="hover:bg-primary hover:text-white rounded-md"
-            onClick={() => {console.log('Edit Button Clicked')}}
+            // onClick={() => {console.log('Edit Button Clicked')}}
+            onClick={handleEditButton}
           />
         </div>
       </div>

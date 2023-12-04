@@ -6,6 +6,7 @@ import { useState } from "react";
 import DeleteConfirmationModal from "@/components/DeletePopUp";
 import { CiSquarePlus } from "react-icons/ci";
 import ModalUserSeminar from "@/components/modalUserSeminar";
+import MyDropdown from "@/components/dropDown";
 
 
 const Profile = ({ Name_arg, Nim_arg }:any) => {
@@ -13,7 +14,10 @@ const Profile = ({ Name_arg, Nim_arg }:any) => {
   const display_Nim = Nim_arg || "NimNimNim";
 
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-  const [isSeminarModalOpen, setIsSeminarModalOpen] = useState(false);
+  const [isAddSeminarModalOpen, setIsAddSeminarModalOpen] = useState(false);
+  const [isEditSeminarModalOpen, setIsEditSeminarModalOpen] = useState(false);
+  const [isAddKPModalOpen, setIsAddKPModalOpen] = useState(false);
+  const [isEditKPModalOpen, setIsEditKPModalOpen] = useState(false);
 
   const openDeleteModal = () => {
     setIsDeleteModalOpen(true);
@@ -31,13 +35,41 @@ const Profile = ({ Name_arg, Nim_arg }:any) => {
     closeDeleteModal();
   };
   
-  const openSeminarModal = () => {
-      setIsSeminarModalOpen(true);
-  }
+    const openAddSeminarModal = () => {
+        setIsAddSeminarModalOpen(true);
+    }
+    
+    const confirmAddSeminar = () => {
+        //post to api
+        setIsAddSeminarModalOpen(false);
+    }
+    
+    const openEditSeminarModal = () => {
+        setIsEditSeminarModalOpen(true);
+    }
+
+    const confirmEditSeminar = () => {
+        //patch to api /
+        setIsEditSeminarModalOpen(false);
+    }
   
-  const confirmSeminar = () => {
-      setIsSeminarModalOpen(false);
-  }
+    const openAddKPModal = () => {
+        setIsAddKPModalOpen(true);
+    }
+    
+    const confirmAddKP = () => {
+        //post to api
+        setIsAddKPModalOpen(false);
+    }
+    
+    const openEditKPModal = () => {
+        setIsEditKPModalOpen(true);
+    }
+
+    const confirmEditKP = () => {
+        //patch to api /
+        setIsEditKPModalOpen(false);
+    }
   
   return (
     <div className="h-screen flex flex-col bg-[#0D6FBC]">
@@ -87,12 +119,13 @@ const Profile = ({ Name_arg, Nim_arg }:any) => {
               <div className="rounded-xl w-full h-full shadow-md mx-auto bg-primary p-3">
                 <div className="flex items-center">
                   <h1 className="mx-1 font-bold text-white text-xl">Seminar</h1>
-                  <CiSquarePlus className="mx-1 mt-1 w-[40px] h-[40px] hover:bg-[#add03f] rounded-md  text-white"  onClick={openSeminarModal}/>
+                  <CiSquarePlus className="mx-1 mt-1 w-[40px] h-[40px] hover:bg-[#add03f] rounded-md  text-white"  onClick={openAddSeminarModal}/>
                 </div>
                 <div className=" mx-auto p-3 max-w-full h-[31vh] overflow-y-auto scrollbar">
                   <HistoryCard
                     display_text="JudulKerjaPraktik"
                     handleDeleteButton={openDeleteModal}
+                    handleEditButton={openEditSeminarModal}
                   />
                 </div>
                 <div className="flex justify-end mx-8"></div>
@@ -106,12 +139,13 @@ const Profile = ({ Name_arg, Nim_arg }:any) => {
                   <h1 className="mx-1 font-bold text-white text-xl">
                     Kerja Praktik
                   </h1>
-                  <CiSquarePlus className="mx-1 mt-1 w-[40px] h-[40px] hover:bg-[#add03f] rounded-md  text-white" />
+                  <CiSquarePlus className="mx-1 mt-1 w-[40px] h-[40px] hover:bg-[#add03f] rounded-md text-white" onClick={openAddKPModal} />
                 </div>
                 <div className=" mx-auto p-3 max-w-full h-[31vh] overflow-y-auto scrollbar">
                   <HistoryCard
                     display_text="JudulKerjaPraktik"
                     handleDeleteButton={openDeleteModal}
+                    handleEditButton={openEditKPModal}
                   />
                 </div>
                 <div className="flex justify-end mx-8"></div>
@@ -134,11 +168,30 @@ const Profile = ({ Name_arg, Nim_arg }:any) => {
         onConfirm={confirmDelete}
       />
       <ModalUserSeminar
-                isOpen={isSeminarModalOpen}
-                title="Add New Seminar"
-                action="Add"
-                onConfirm={confirmSeminar} />
-
+        isOpen={isAddSeminarModalOpen}
+        title="Add New Seminar"
+        action="Add"
+        onConfirm={confirmAddSeminar} 
+       />
+      <ModalUserSeminar
+        isOpen={isEditSeminarModalOpen}
+        title="Edit Seminar"
+        action="Edit"
+        onConfirm={confirmEditSeminar} 
+       />
+      <ModalUserSeminar //keknya perlu ganti modal (?)
+        isOpen={isAddKPModalOpen}
+        title="Add New KP"
+        action="Add"
+        onConfirm={confirmAddKP} 
+       />
+      <ModalUserSeminar //keknya perlu ganti modal (?)
+        isOpen={isEditKPModalOpen}
+        title="Edit KP"
+        action="Edit"
+        onConfirm={confirmEditKP} 
+       />
+       <MyDropdown/>
     </div>
   );
 };
