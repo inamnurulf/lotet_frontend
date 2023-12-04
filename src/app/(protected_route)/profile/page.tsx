@@ -4,6 +4,7 @@ import HistoryCard from "@/components/historycard";
 import { IoLogOutOutline } from "react-icons/io5";
 import { useState } from "react";
 import DeleteConfirmationModal from "@/components/DeletePopUp";
+import ModalUserSeminar from "@/components/modalUserSeminar";
 
 interface ProfileProps{
     Name_arg: string,
@@ -19,6 +20,7 @@ const Profile: React.FC<ProfileProps> = ({
 
 
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+    const [isSeminarModalOpen, setIsSeminarModalOpen] = useState(false);
 
     const openDeleteModal= ()=>{
         setIsDeleteModalOpen(true)  
@@ -35,6 +37,15 @@ const Profile: React.FC<ProfileProps> = ({
         // }
         closeDeleteModal();
       };
+    
+    const openSeminarModal = () => {
+        setIsSeminarModalOpen(true);
+    }
+    
+    const confirmSeminar = () => {
+        setIsSeminarModalOpen(false);
+    }
+    
 
     return (
         <div className="h-screen flex flex-col">
@@ -71,6 +82,12 @@ const Profile: React.FC<ProfileProps> = ({
                 </button>
                 </div>
 
+                <ModalUserSeminar
+                isOpen={isSeminarModalOpen}
+                title="Add New Seminar"
+                action="Add"
+                onConfirm={confirmSeminar} />
+
                 {/* Right part */}
                 <div className="flex flex-col flex-1">
                 {/* Right-top */}
@@ -86,7 +103,9 @@ const Profile: React.FC<ProfileProps> = ({
                         </div>
                     </div>
                         <div className="flex justify-end mx-8">
-                            <button className="mx-16 mt-1 w-[50px] h-[25px] bg-[#add03f] rounded-md  hover:bg-[#76970f]">
+                            <button 
+                                className="mx-16 mt-1 w-[50px] h-[25px] bg-[#add03f] rounded-md  hover:bg-[#76970f]"
+                                onClick={openSeminarModal} >
                                 +add
                             </button>
                         </div>
@@ -117,6 +136,11 @@ const Profile: React.FC<ProfileProps> = ({
             onClose={closeDeleteModal}
             onConfirm={confirmDelete}/>
 
+            <ModalUserSeminar
+            isOpen={isSeminarModalOpen}
+            title="Add New Seminar"
+            action="Add"
+            onConfirm={confirmSeminar} />
         </div>
     )
 }
