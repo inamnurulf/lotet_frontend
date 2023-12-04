@@ -60,12 +60,13 @@ const Profile: React.FC<ProfileProps> = ({
                 </div>
                 
                 
-                <button className="absolute inset-x-0 bottom-6 rounded-xl mx-auto h-[40px] w-[60%] bg-[#0D6FBC] flex flex-row hover:bg-[#529cd5] ">
+                <button className="absolute inset-x-0 bottom-6 rounded-xl mx-auto h-[40px] w-[60%] bg-[#0D6FBC] flex flex-row hover:bg-[#4e9edc] ">
                     <IoLogOutOutline 
+                        color='white'
                         size='30px'
                         className='ml-2 mt-1.5 md:max-w-1/4'
                     />
-                    <text className=" my-auto mx-auto font-bold text-xs md:text-xl">Logout</text>
+                    <text className=" my-auto mx-auto font-bold text-xs text-white md:text-xl">Logout</text>
                 
                 </button>
                 </div>
@@ -73,9 +74,9 @@ const Profile: React.FC<ProfileProps> = ({
                 {/* Right part */}
                 <div className="flex flex-col flex-1">
                 {/* Right-top */}
-                <div className="flex-1 bg-primary">
+                <div className="flex-1 bg-primary ">
                     {/* Content for the right-top */}
-                    <h1 className="mx-20 my-3 font-bold text-white">Seminar</h1>
+                    <h1 className="mx-20 my-3 font-bold text-white text-xl">Seminar</h1>
                     <div className="rounded-xl w-[85%] h-[70%] shadow-md mx-auto">
                         <div className="bg-primary rounded-md mx-auto p-3 max-w-full h-[31vh] overflow-y-auto scrollbar">
                         <HistoryCard 
@@ -94,7 +95,7 @@ const Profile: React.FC<ProfileProps> = ({
                 {/* Right-bottom */}
                 <div className="flex-1 bg-primary">
                     {/* Content for the right-bottom */}
-                    <h1 className="mx-20 my-3 font-bold text-white">Kerja Praktik</h1>
+                    <h1 className="mx-20 my-3 font-bold text-white text-xl">Kerja Praktik</h1>
                     <div className="rounded-xl w-[85%] h-[70%] shadow-md mx-auto">
                         <div className="bg-primary rounded-md mx-auto p-3 max-w-full h-[31vh] overflow-y-auto scrollbar">
                             <HistoryCard 
