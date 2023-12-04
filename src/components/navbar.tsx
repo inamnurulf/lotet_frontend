@@ -98,25 +98,25 @@ const Navbar = ({ defaultform = true }) => {
             <div className=" z-[100] w-full md:w-[90vw] text-right md:hidden flex justify-center flex-col items-center p-3">
               <a
                 href="/home"
-                className="mx-3 hover:bg-primary hover:text-white w-full p-3 border border-2"
+                className="mx-3 hover:bg-primary hover:text-white w-full p-3 "
               >
                 Home
               </a>
               <a
                 href="/kerjapraktik"
-                className="mx-3 hover:bg-primary hover:text-white w-full p-3 border border-2"
+                className="mx-3 hover:bg-primary hover:text-white w-full p-3 "
               >
                 Kerja Praktik
               </a>
               <a
                 href="/seminar"
-                className="mx-3 hover:bg-primary hover:text-white w-full p-3 border border-2"
+                className="mx-3 hover:bg-primary hover:text-white w-full p-3 "
               >
                 Seminar
               </a>
               <a
                 href="/auth/login"
-                className="mx-3 hover:bg-primary hover:text-white w-full p-3 border border-2"
+                className="mx-3 hover:bg-primary hover:text-white w-full p-3 "
               >
                 Login
               </a>
