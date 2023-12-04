@@ -191,7 +191,6 @@ const Profile = ({ Name_arg, Nim_arg }:any) => {
         action="Edit"
         onConfirm={confirmEditKP} 
        />
-       <MyDropdown/>
     </div>
   );
 };
