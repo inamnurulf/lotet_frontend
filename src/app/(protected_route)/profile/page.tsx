@@ -7,12 +7,8 @@ import DeleteConfirmationModal from "@/components/DeletePopUp";
 import { CiSquarePlus } from "react-icons/ci";
 import ModalUserSeminar from "@/components/modalUserSeminar";
 
-interface ProfileProps {
-  Name_arg: string;
-  Nim_arg: string;
-}
 
-const Profile: React.FC<ProfileProps> = ({ Name_arg, Nim_arg }) => {
+const Profile = ({ Name_arg, Nim_arg }:any) => {
   const display_Name = Name_arg || "NamaNamaNama";
   const display_Nim = Nim_arg || "NimNimNim";
 
