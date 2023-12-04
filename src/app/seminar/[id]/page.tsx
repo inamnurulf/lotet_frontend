@@ -17,7 +17,7 @@ const SeminarDetails = () => {
   return (
     <div className='flex flex-col bg-primary items-center overflow-hidden min-w-fit min-h-screen'>
       <Navbar defaultform = {false}/>
-      <div className='justify-center grid grid-cols-1 md:grid-cols-2 gap-16 mt-32 mx-auto'>
+      <div className='justify-center grid grid-cols-1 md:grid-cols-2 gap-8 mt-32 mx-8'>
         <SeminarDescription/>
         <SeminarInfo></SeminarInfo>
       </div>

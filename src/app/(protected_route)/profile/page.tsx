@@ -5,6 +5,7 @@ import { IoLogOutOutline } from "react-icons/io5";
 import { useState } from "react";
 import DeleteConfirmationModal from "@/components/DeletePopUp";
 import { CiSquarePlus } from "react-icons/ci";
+import ModalUserSeminar from "@/components/modalUserSeminar";
 
 interface ProfileProps {
   Name_arg: string;
@@ -16,11 +17,12 @@ const Profile: React.FC<ProfileProps> = ({ Name_arg, Nim_arg }) => {
   const display_Nim = Nim_arg || "NimNimNim";
 
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [isSeminarModalOpen, setIsSeminarModalOpen] = useState(false);
 
   const openDeleteModal = () => {
     setIsDeleteModalOpen(true);
   };
-
+  
   const closeDeleteModal = () => {
     setIsDeleteModalOpen(false);
     // setItemToDelete(null);
@@ -32,7 +34,15 @@ const Profile: React.FC<ProfileProps> = ({ Name_arg, Nim_arg }) => {
     // }
     closeDeleteModal();
   };
-
+  
+  const openSeminarModal = () => {
+      setIsSeminarModalOpen(true);
+  }
+  
+  const confirmSeminar = () => {
+      setIsSeminarModalOpen(false);
+  }
+  
   return (
     <div className="h-screen flex flex-col bg-[#0D6FBC]">
       {/* Top part */}
@@ -81,7 +91,7 @@ const Profile: React.FC<ProfileProps> = ({ Name_arg, Nim_arg }) => {
               <div className="rounded-xl w-full h-full shadow-md mx-auto bg-primary p-3">
                 <div className="flex items-center">
                   <h1 className="mx-1 font-bold text-white text-xl">Seminar</h1>
-                  <CiSquarePlus className="mx-1 mt-1 w-[40px] h-[40px] hover:bg-[#add03f] rounded-md  text-white" />
+                  <CiSquarePlus className="mx-1 mt-1 w-[40px] h-[40px] hover:bg-[#add03f] rounded-md  text-white"  onClick={openSeminarModal}/>
                 </div>
                 <div className=" mx-auto p-3 max-w-full h-[31vh] overflow-y-auto scrollbar">
                   <HistoryCard
@@ -113,7 +123,7 @@ const Profile: React.FC<ProfileProps> = ({ Name_arg, Nim_arg }) => {
             </div>
           </div>
           <div className="rounded-xl w-full min-h-[10%] mx-auto pr-3 pb-3">
-            <div className="rounded-xl h-full shadow-md bg-primary flex items-center justify-center">
+            <div className="rounded-xl h-full shadow-md bg-[#add03f] flex items-center justify-center">
               <p className="text-center text-white text-sm italic">
                 Warning: Pastikan anda bertanggung jawab terhadap apa yang anda
                 inputkan
@@ -127,6 +137,12 @@ const Profile: React.FC<ProfileProps> = ({ Name_arg, Nim_arg }) => {
         onClose={closeDeleteModal}
         onConfirm={confirmDelete}
       />
+      <ModalUserSeminar
+                isOpen={isSeminarModalOpen}
+                title="Add New Seminar"
+                action="Add"
+                onConfirm={confirmSeminar} />
+
     </div>
   );
 };
