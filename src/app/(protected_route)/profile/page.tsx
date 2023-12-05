@@ -6,8 +6,6 @@ import { useState } from "react";
 import DeleteConfirmationModal from "@/components/DeletePopUp";
 import { CiSquarePlus } from "react-icons/ci";
 import ModalUserSeminar from "@/components/modalUserSeminar";
-import MyDropdown from "@/components/dropDown";
-
 
 const Profile = ({ Name_arg, Nim_arg }:any) => {
   const display_Name = Name_arg || "NamaNamaNama";

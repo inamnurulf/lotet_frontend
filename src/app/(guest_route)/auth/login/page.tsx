@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/auth-context";
 
@@ -7,6 +7,8 @@ const SignIn = () => {
   const { login } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [buttonDisabled, setButtonDisabled] = React.useState(false);
+
   const router = useRouter();
 
   const handleChangeEmail = (e:any) => {
@@ -46,6 +48,18 @@ const SignIn = () => {
       console.error("Error during login:", error);
     }
   };
+
+  useEffect(() => {
+    if (
+      email.length > 0 &&
+      password.length > 0
+    ) {
+      setButtonDisabled(false);
+    } else {
+      setButtonDisabled(true);
+    }
+  }, [email, password]);
+
   return (
     <section className="bg-primary backgroundsection">
       <div className="flex justify-center items-center h-screen">
@@ -75,7 +89,10 @@ const SignIn = () => {
           </div>
           <div className="flex flex-col items-center justify-between">
             <button
-              className="bg-secondary transform transition-transform hover:scale-105 font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              className= {buttonDisabled ? 
+                "bg-[#cbd5e1] font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline" :
+                "bg-secondary transform transition-transform hover:scale-105 font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline"}
+              disabled = {buttonDisabled}
               type="button"
               onClick={handleSubmit}
             >
