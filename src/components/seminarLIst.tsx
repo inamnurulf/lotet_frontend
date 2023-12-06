@@ -2,8 +2,6 @@
 import React, { useEffect, useState } from 'react'
 import SeminarCard from "./atom/seminarCard"
 import axios from 'axios'
-import Aos from 'aos'
-import "aos/dist/aos.css";
 
 interface Seminar{
   _id: string;

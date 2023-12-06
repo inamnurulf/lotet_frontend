@@ -1,17 +1,8 @@
-// 'use client'
 import Navbar from '@/components/navbar'
 import SearchBar from '@/components/searchBar'
 import SeminarList from '@/components/seminarLIst'
-import Aos from 'aos'
-import "aos/dist/aos.css";
-import { useEffect } from 'react'
 
 const Seminar = () => {  
-  // useEffect(() => {
-  //   Aos.init({
-  //     duration: 800
-  //   });
-  // }, []);
   return (
     <section className='flex items-center flex-col overflow-auto bg-primary min-h-screen'>
       <Navbar defaultform = {false}></Navbar>
