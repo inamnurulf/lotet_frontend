@@ -1,10 +1,9 @@
-'use client';
+'use client'
+import Aos from "aos";
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect } from "react";
 import {FaCalendarDays, FaLocationPin} from 'react-icons/fa6'
-import {useEffect} from 'react'
-import Aos from 'aos'
-import "aos/dist/aos.css";
 
 interface SeminarCardProps {
   id: string,
@@ -14,16 +13,16 @@ interface SeminarCardProps {
 }
 
 const SeminarCard: React.FC<SeminarCardProps> = ({ id, title, date, location }) => {
+  const dateOnly = new Date(date).toDateString()
   useEffect(() => {
     Aos.init({
-      duration: 800
+      duration: 800,
+      easing: 'ease-out'
     });
   }, []);
-  const dateOnly = new Date(date).toDateString()
   return (
-    <div  className="shadow-lg hover:shadow-xl hover:scale-105 transition duration-300">
-
-    <div id={id} aos-data = 'zoom-in-up' className="max-w-md min-w-full md:min-w-0 bg-white rounded-xl overflow-hidden  cursor-pointer">
+    <div data-aos="fade-up" className="">
+    <div id={id} className="max-w-md min-w-full md:min-w-0 bg-white rounded-xl overflow-hidden  cursor-pointer shadow-lg hover:shadow-xl hover:scale-105 transition duration-300">
       <Link href={`./seminar/${id}`}>
         <div>
           <Image

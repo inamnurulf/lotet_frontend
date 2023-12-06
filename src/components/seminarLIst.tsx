@@ -19,11 +19,6 @@ interface Seminar{
 }
 
 const SeminarList = () =>{
-  useEffect(() => {
-    Aos.init({
-      duration: 1200
-    });
-  }, []);
   const [response, setResponse] = useState<Seminar[]>([]);
   useEffect(
     () =>{
@@ -43,7 +38,7 @@ const SeminarList = () =>{
               <SeminarCard key={item._id} id = {item._id} title={item.title} date={item.eventTime} location='Ngak tauu'/>
             ))
           }
-        </div>
+    </div>
   )
 }
 export default SeminarList
