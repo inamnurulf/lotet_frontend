@@ -2,6 +2,8 @@
 import React, { useEffect, useState } from 'react'
 import SeminarCard from "./atom/seminarCard"
 import axios from 'axios'
+import Aos from 'aos'
+import "aos/dist/aos.css";
 
 interface Seminar{
   _id: string;
@@ -17,6 +19,11 @@ interface Seminar{
 }
 
 const SeminarList = () =>{
+  useEffect(() => {
+    Aos.init({
+      duration: 1200
+    });
+  }, []);
   const [response, setResponse] = useState<Seminar[]>([]);
   useEffect(
     () =>{
@@ -30,7 +37,7 @@ const SeminarList = () =>{
     }, []
   )
   return(
-    <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
+    <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4' >
           {
             response.map(item => (
               <SeminarCard key={item._id} id = {item._id} title={item.title} date={item.eventTime} location='Ngak tauu'/>

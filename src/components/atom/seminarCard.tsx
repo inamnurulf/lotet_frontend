@@ -2,6 +2,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import {FaCalendarDays, FaLocationPin} from 'react-icons/fa6'
+import {useEffect} from 'react'
+import Aos from 'aos'
+import "aos/dist/aos.css";
 
 interface SeminarCardProps {
   id: string,
@@ -11,12 +14,16 @@ interface SeminarCardProps {
 }
 
 const SeminarCard: React.FC<SeminarCardProps> = ({ id, title, date, location }) => {
+  useEffect(() => {
+    Aos.init({
+      duration: 800
+    });
+  }, []);
   const dateOnly = new Date(date).toDateString()
-  const onclick = () =>{
-    alert("click")
-  }
   return (
-    <div id={id} className="max-w-md min-w-full md:min-w-0 bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl hover:scale-105 transition duration-300 cursor-pointer">
+    <div  className="shadow-lg hover:shadow-xl hover:scale-105 transition duration-300">
+
+    <div id={id} aos-data = 'zoom-in-up' className="max-w-md min-w-full md:min-w-0 bg-white rounded-xl overflow-hidden  cursor-pointer">
       <Link href={`./seminar/${id}`}>
         <div>
           <Image
@@ -24,7 +31,7 @@ const SeminarCard: React.FC<SeminarCardProps> = ({ id, title, date, location }) 
             alt = "Search"
             width={386}
             height={200}
-          />
+            />
         </div>
         <h2 className="font-bold text-xl mb-2 px-4">{title}</h2>
         <div className="flex mb-4 items-start space-x-4 px-4">
@@ -41,6 +48,7 @@ const SeminarCard: React.FC<SeminarCardProps> = ({ id, title, date, location }) 
         
         
       </Link>
+    </div>
     </div>
   );
 };
