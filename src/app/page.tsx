@@ -12,7 +12,7 @@ export default function Home() {
     });
   },[]);
   return (
-    <section>
+    <section className="!max-w-screen">
       <a href="/home" className="min-w-screen min-h-screen bg-primary justify-center items-center flex flex-col backgroundsection cursor-default">
         <div data-aos="fade-right" className="w-96 h-52 text-center text-white text-4xl font-bold">
           <Image

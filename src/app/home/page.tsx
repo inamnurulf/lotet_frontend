@@ -32,12 +32,12 @@ const Home = () => {
     };
   }, []);
   return (
-    <section className="flex items-center flex-col bg-primary max-h-screen">
+    <section className="flex items-center flex-col bg-primary max-h-screen md:overflow-x-hidden">
       <Navbar defaultform={false} />
-      <div className="md:flex">
+      <div className="md:flex w-full">
         <div className="md:w-[50vw] flex flex-col justify-center items-start min-h-screen">
           <div className="left-[15%] relative" >
-            <div className="flex items-end" data-aos="fade-right">
+            <div className="flex items-end" data-aos="fade-up">
               <div className="text-white text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-semibold">
                 Pengen
               </div>
@@ -45,17 +45,20 @@ const Home = () => {
                 <span id="animated-text" className="text-secondary"></span>
               </div>
             </div>
-            <div className="text-white text-xl py-3" data-aos="fade-left">
+            <div className="text-white text-xl py-3" data-aos="fade-up">
               Tetep kudu cari KP dulu !
             </div>
           </div>
-          <div className="w-full text-center absolute" data-aos="fade-right">
-            <FaArrowDown className="text-white animate-bounce md:hidden mx-auto mt-[120vw]"/>
+          <div className="w-full text-center absolute" data-aos="fade-up">
+            <div className=" mt-[120vw] mx-auto text-white animate-bounce md:hidden ">
+            <div>(scroll down)</div>
+            <FaArrowDown className="mx-auto"/>
+            </div>
           </div>
         </div>
-        <div className="bg-secondary w-screen md:w-[50vw] min-h-screen flex items-center" id="whatsnew">
-          <div className="mx-auto">
-            <div className="text-white text-2xl px-7 py-2 font-semibold">
+        <div className="bg-secondary md:w-[50vw] min-h-screen flex items-center">
+          <div className="mx-auto" data-aos="fade-up">
+            <div className="text-white text-2xl px-7 py-2 font-semibold" >
               Whats New?
             </div>
             <Carousell />

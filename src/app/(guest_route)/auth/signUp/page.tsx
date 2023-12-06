@@ -2,6 +2,7 @@
 import React, { useEffect } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { render } from "react-dom";
 
 const SignUp = () => {
   const router = useRouter();
@@ -14,20 +15,45 @@ const SignUp = () => {
 
   const [buttonDisabled, setButtonDisabled] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
+  const [samePassword, setSamePassword] = React.useState(false);
 
   const onSignUp = async () => {
     try {
       setLoading(true);
-      const response = await axios.post(
-        "http://localhost:3030/user/signUp",
-        user
-      );
-      console.log("Sign Up Success", response.data);
+      // const response = await axios.post(
+      //   "http://localhost:3030/user/signUp",
+      //   user
+      // );
+      // console.log("Sign Up Success", response.data);
       router.push("/auth/login");
     } catch (error) {
       console.log("Sign Up Error", error);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleChangeEmail = (e:any) => {
+    setUser({ ...user, email: e.target.value })
+  };
+
+  const handleChangeConfirmPassword = (e:any) => {
+    setUser({ ...user, confirmPassword: e.target.value });
+
+    // if (user.password === user.confirmPassword) {
+    //   setSamePassword(true);
+    // }
+    // else {
+    //   setSamePassword(false);
+    // }
+  };
+
+  const passwordCheck = () => {
+    if (user.password === user.confirmPassword) {
+      onSignUp
+    }
+    else {
+      alert("Both passwords are not identical!")
     }
   };
 
@@ -60,7 +86,7 @@ const SignUp = () => {
               id="email"
               type="email"
               value={user.email}
-              onChange={(e) => setUser({ ...user, email: e.target.value })}
+              onChange={handleChangeEmail}
             ></input>
           </div>
           <div className="mb-6">
@@ -81,25 +107,27 @@ const SignUp = () => {
               {/* for="password" */}
               Confirm password
             </label>
+            {/* <p onChange={handleChangeConfirmPassword}></p> */}
             <input
+              value={user.confirmPassword}
+              onChange={handleChangeConfirmPassword}
               className="appearance-none bg-zinc-300 border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               id="confirmPassword"
               type="password"
-              value={user.confirmPassword}
-              onChange={(e) =>
-                setUser({ ...user, confirmPassword: e.target.value })
-              }
             ></input>
           </div>
           <div className="flex flex-col items-center justify-between">
-            <a
-              className="bg-secondary transform transition-transform hover:scale-105 font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            <button
+              disabled = {buttonDisabled}
+              className= {buttonDisabled ? 
+                "bg-[#cbd5e1] font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline" : 
+                "bg-secondary transform transition-transform hover:scale-105 font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline"}
               type="button"
               // href="/home"
-              onClick={onSignUp}
+              onClick={passwordCheck}
             >
-              {buttonDisabled ? "Disabled" : "Sign Up"}
-            </a>
+              Sign Up
+            </button>
             <p>
               Already have an account?
               <a
