@@ -128,7 +128,7 @@ const SignUp = () => {
             <button
               disabled = {buttonDisabled}
               className= {buttonDisabled ? 
-                "bg-[#cbd5e1] font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline" : 
+                "bg-gray-200 font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline" : 
                 "bg-secondary transform transition-transform hover:scale-105 font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline"}
               type="button"
               onClick={passwordCheck}

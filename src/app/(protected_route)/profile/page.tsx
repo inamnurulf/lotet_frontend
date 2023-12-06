@@ -5,12 +5,13 @@ import { IoLogOutOutline } from "react-icons/io5";
 import { useState } from "react";
 import DeleteConfirmationModal from "@/components/DeletePopUp";
 import { CiSquarePlus } from "react-icons/ci";
-import ModalUserSeminar from "@/components/modalUserSeminar";
+import ModalUser from "@/components/modalUser";
 
 const Profile = ({ Name_arg, Nim_arg }:any) => {
   const display_Name = Name_arg || "NamaNamaNama";
   const display_Nim = Nim_arg || "NimNimNim";
 
+  const [isKP, setIsKP] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isAddSeminarModalOpen, setIsAddSeminarModalOpen] = useState(false);
   const [isEditSeminarModalOpen, setIsEditSeminarModalOpen] = useState(false);
@@ -34,6 +35,7 @@ const Profile = ({ Name_arg, Nim_arg }:any) => {
   };
   
     const openAddSeminarModal = () => {
+        setIsKP(false);
         setIsAddSeminarModalOpen(true);
     }
     
@@ -43,6 +45,7 @@ const Profile = ({ Name_arg, Nim_arg }:any) => {
     }
     
     const openEditSeminarModal = () => {
+        setIsKP(false);
         setIsEditSeminarModalOpen(true);
     }
 
@@ -50,8 +53,14 @@ const Profile = ({ Name_arg, Nim_arg }:any) => {
         //patch to api /
         setIsEditSeminarModalOpen(false);
     }
+
+    const closeSeminarModal = () => {
+      setIsAddSeminarModalOpen(false);
+      setIsEditSeminarModalOpen(false);
+    }
   
     const openAddKPModal = () => {
+        setIsKP(true);
         setIsAddKPModalOpen(true);
     }
     
@@ -61,12 +70,18 @@ const Profile = ({ Name_arg, Nim_arg }:any) => {
     }
     
     const openEditKPModal = () => {
+        setIsKP(true);
         setIsEditKPModalOpen(true);
     }
 
     const confirmEditKP = () => {
         //patch to api /
         setIsEditKPModalOpen(false);
+    }
+
+    const closeKPModal = () => {
+      setIsAddKPModalOpen(false);
+      setIsEditKPModalOpen(false);
     }
   
   return (
@@ -139,7 +154,7 @@ const Profile = ({ Name_arg, Nim_arg }:any) => {
                   </h1>
                   <CiSquarePlus className="mx-1 mt-1 w-[40px] h-[40px] hover:bg-[#add03f] rounded-md text-white" onClick={openAddKPModal} />
                 </div>
-                <div className=" mx-auto p-3 max-w-full h-[31vh] overflow-y-auto scrollbar">
+                <div className="mx-auto p-3 max-w-full h-[31vh] overflow-y-auto scrollbar">
                   <HistoryCard
                     display_text="JudulKerjaPraktik"
                     handleDeleteButton={openDeleteModal}
@@ -165,29 +180,37 @@ const Profile = ({ Name_arg, Nim_arg }:any) => {
         onClose={closeDeleteModal}
         onConfirm={confirmDelete}
       />
-      <ModalUserSeminar
+      <ModalUser
         isOpen={isAddSeminarModalOpen}
+        isKP={isKP}
         title="Add New Seminar"
         action="Add"
-        onConfirm={confirmAddSeminar} 
+        onConfirm={confirmAddSeminar}
+        onClose={closeSeminarModal} 
        />
-      <ModalUserSeminar
+      <ModalUser
         isOpen={isEditSeminarModalOpen}
+        isKP={isKP}
         title="Edit Seminar"
         action="Edit"
         onConfirm={confirmEditSeminar} 
+        onClose={closeSeminarModal} 
        />
-      <ModalUserSeminar //keknya perlu ganti modal (?)
+      <ModalUser //keknya perlu ganti modal (?)
         isOpen={isAddKPModalOpen}
+        isKP={isKP}
         title="Add New KP"
         action="Add"
         onConfirm={confirmAddKP} 
+        onClose={closeKPModal}
        />
-      <ModalUserSeminar //keknya perlu ganti modal (?)
+      <ModalUser //keknya perlu ganti modal (?)
         isOpen={isEditKPModalOpen}
+        isKP={isKP}
         title="Edit KP"
         action="Edit"
         onConfirm={confirmEditKP} 
+        onClose={closeKPModal}
        />
     </div>
   );
