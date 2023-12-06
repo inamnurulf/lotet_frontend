@@ -2,12 +2,14 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/auth-context";
+import PasswordMatch from "@/components/passwordMatch";
 
 const SignIn = () => {
   const { login } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [buttonDisabled, setButtonDisabled] = React.useState(false);
+  const [passwordCheck, setPasswordCheck] = React.useState(true);
 
   const router = useRouter();
 
@@ -37,16 +39,21 @@ const SignIn = () => {
       );
 
       if (response.ok) {
+        setPasswordCheck(true);
         const data = await response.json();
         login(data);
         router.push("/dashboard");
       } else {
+        setPasswordCheck(false);
         const errorData = await response.json();
         console.error("Login failed:", errorData);
       }
     } catch (error) {
       console.error("Error during login:", error);
     }
+    // if (email != password) {
+    //   setPasswordCheck(false);
+    // }
   };
 
   useEffect(() => {
@@ -65,6 +72,9 @@ const SignIn = () => {
       <div className="flex justify-center items-center h-screen">
         <form className="bg-white rounded-lg shadow-lg p-8">
           <h2 className="text-center text-2xl font-bold mb-4">Login</h2>
+          <div className="mb-4">
+            {passwordCheck ? <p></p>:<PasswordMatch message="Wrong email or password!" />}
+          </div>
           <div className="mb-4">
             <label className="block text-gray-700 font-semibold mb-2">
               Email
@@ -90,7 +100,7 @@ const SignIn = () => {
           <div className="flex flex-col items-center justify-between">
             <button
               className= {buttonDisabled ? 
-                "bg-[#cbd5e1] font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline" :
+                "bg-gray-200 font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline" :
                 "bg-secondary transform transition-transform hover:scale-105 font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline"}
               disabled = {buttonDisabled}
               type="button"

@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { render } from "react-dom";
+import PasswordMatch from "@/components/passwordMatch";
 
 const SignUp = () => {
   const router = useRouter();
@@ -15,7 +16,7 @@ const SignUp = () => {
 
   const [buttonDisabled, setButtonDisabled] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
-  const [samePassword, setSamePassword] = React.useState(false);
+  const [samePassword, setSamePassword] = React.useState(true);
 
   const onSignUp = async () => {
     try {
@@ -37,6 +38,10 @@ const SignUp = () => {
     setUser({ ...user, email: e.target.value })
   };
 
+  const handleChangePassword = (e:any) => {
+    setUser({ ...user, password: e.target.value })
+  };
+
   const handleChangeConfirmPassword = (e:any) => {
     setUser({ ...user, confirmPassword: e.target.value });
 
@@ -50,10 +55,11 @@ const SignUp = () => {
 
   const passwordCheck = () => {
     if (user.password === user.confirmPassword) {
-      onSignUp
+      setSamePassword(true);
+      onSignUp;
     }
     else {
-      alert("Both passwords are not identical!")
+      setSamePassword(false);
     }
   };
 
@@ -77,6 +83,9 @@ const SignUp = () => {
             {loading ? "Loading..." : "Sign Up"}
           </h2>
           <div className="mb-4">
+              {samePassword ? <p></p> : <PasswordMatch message='Both passwords are not identical!' />}
+            </div>
+          <div className="mb-4">
             <label className="block text-gray-700 font-semibold mb-2">
               {/* for="email" */}
               Email
@@ -89,7 +98,7 @@ const SignUp = () => {
               onChange={handleChangeEmail}
             ></input>
           </div>
-          <div className="mb-6">
+          <div className="mb-4">
             <label className="block text-gray-700 font-semibold mb-2">
               {/* for="password" */}
               Password
@@ -99,7 +108,7 @@ const SignUp = () => {
               id="password"
               type="password"
               value={user.password}
-              onChange={(e) => setUser({ ...user, password: e.target.value })}
+              onChange={handleChangePassword}
             ></input>
           </div>
           <div className="mb-6">
@@ -107,7 +116,6 @@ const SignUp = () => {
               {/* for="password" */}
               Confirm password
             </label>
-            {/* <p onChange={handleChangeConfirmPassword}></p> */}
             <input
               value={user.confirmPassword}
               onChange={handleChangeConfirmPassword}
@@ -120,10 +128,9 @@ const SignUp = () => {
             <button
               disabled = {buttonDisabled}
               className= {buttonDisabled ? 
-                "bg-[#cbd5e1] font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline" : 
+                "bg-gray-200 font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline" : 
                 "bg-secondary transform transition-transform hover:scale-105 font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline"}
               type="button"
-              // href="/home"
               onClick={passwordCheck}
             >
               Sign Up
