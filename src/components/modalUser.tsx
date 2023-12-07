@@ -16,7 +16,7 @@ const ModalUser = ({ title, action, isOpen, onClose, onConfirm, isKP }: any) => 
 
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
-  
+  const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
 
   useEffect(() => {
     AOS.init({
@@ -31,6 +31,20 @@ const ModalUser = ({ title, action, isOpen, onClose, onConfirm, isKP }: any) => 
   const handleDateChange = (date: Date | null) => {
     setSelectedDate(date);
   };
+
+  const handleDropdownChange =  (options: any) => {
+    setSelectedOptions(Array.isArray(options) ? options.map(x => x.value) : []);
+  };
+
+  const handleSubmit = () => {
+    console.log(previewUrl);
+    console.log(selectedDate);
+    console.log(selectedOptions);
+  }
+
+  useEffect(()=>{
+    // console.log(selectedOptions)
+  },[selectedOptions])
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-30 backdrop-blur-sm flex justify-center items-center">
@@ -83,14 +97,15 @@ const ModalUser = ({ title, action, isOpen, onClose, onConfirm, isKP }: any) => 
               <label className="block text-gray-700 font-semibold mb-2">
                 Category
               </label>
-              <Dropdown/>
+              <Dropdown onSelectValue={handleDropdownChange} />
             </div>
           </div>
           <div className="w-full flex flex-row-reverse gap-3">
             <button
               className="bg-secondary transform transition-transform hover:scale-105 font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               type="button"
-              onClick={onConfirm}
+              onClick={handleSubmit}
+              // onClick={onConfirm}
             >
               {action}
             </button>

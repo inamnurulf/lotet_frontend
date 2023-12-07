@@ -2,12 +2,38 @@
 import Navbar from "@/components/navbar";
 import HistoryCard from "@/components/historycard";
 import { IoLogOutOutline } from "react-icons/io5";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import DeleteConfirmationModal from "@/components/DeletePopUp";
 import { CiSquarePlus } from "react-icons/ci";
 import ModalUser from "@/components/modalUser";
+import axios from "axios";
+import { useAuth } from "@/context/auth-context";
 
-const Profile = ({ Name_arg, Nim_arg }:any) => {
+
+interface Seminar {
+  _id: string;
+  user_id: string;
+  title: string;
+  details: string;
+  image: string;
+  eventTime: string;
+  category: string[];
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+}
+
+interface KerjaPraktik {
+  _id: string;
+  title: string;
+  user_id: string;
+  details: string;
+  image: string;
+  category: string[];
+
+}
+
+const Profile = ({ Name_arg, Nim_arg }: any) => {
   const display_Name = Name_arg || "NamaNamaNama";
   const display_Nim = Nim_arg || "NimNimNim";
 
@@ -17,73 +43,147 @@ const Profile = ({ Name_arg, Nim_arg }:any) => {
   const [isEditSeminarModalOpen, setIsEditSeminarModalOpen] = useState(false);
   const [isAddKPModalOpen, setIsAddKPModalOpen] = useState(false);
   const [isEditKPModalOpen, setIsEditKPModalOpen] = useState(false);
+  const [itemToDelete, setItemToDelete] = useState<any>(null);
+  const { logout } = useAuth()
 
-  const openDeleteModal = () => {
-    setIsDeleteModalOpen(true);
-  };
-  
+  const [seminar, setSeminar] = useState<Seminar[]>([]);
+  useEffect(
+    () => {
+      axios.get<Seminar[]>(`${process.env.NEXT_PUBLIC_BACKEND_URL}seminar/search/byUserID/65150f9f865eb74f1701bf73`)
+        .then(res => {
+          setSeminar(res.data); // Assuming the response is an array
+        })
+        .catch(error => {
+          console.error('Error fetching data:', error);
+        });
+    }, []
+  )
+
+  const [KerjaPraktik, setKerjaPraktik] = useState<KerjaPraktik[]>([]);
+  useEffect(
+    () => {
+      axios.get<KerjaPraktik[]>(`${process.env.NEXT_PUBLIC_BACKEND_URL}kerjaPraktik/search/byUserID/651516da7c566267bfd647f3`)
+        .then(res => {
+          setKerjaPraktik(res.data); // Assuming the response is an array
+        })
+        .catch(error => {
+          console.error('Error fetching data:', error);
+        });
+    }, []
+  )
+
+  //Deletion-related function
+  const handleDeleteSeminarSubmit = (id: number, isKP: boolean) => {
+    const URL_Seminar = `${process.env.NEXT_PUBLIC_BACKEND_URL}seminar/${id}`
+    const URL_KerjaPraktik = `${process.env.NEXT_PUBLIC_BACKEND_URL}kerjaPraktik/${id}`
+
+    let API_URL = isKP ? URL_KerjaPraktik : URL_Seminar;
+
+    console.log(API_URL)
+
+    axios.delete(API_URL)
+      .then((response) => {
+        console.log(response)
+        if (response.status==200) {
+          // setUsers((prevUsers) =>
+          //   prevUsers.filter((user: any) => user.id !== userId)
+          // );
+          // toast("User Profile Vanquished from the Database! ⚰️", {
+          //   hideProgressBar: false,
+          //   autoClose: 2000,
+          //   type: "success",
+          //   theme: "colored",
+          // });
+
+          if (isKP) {
+            setKerjaPraktik((prevsKP) => prevsKP.filter((KP: any) => KP._id !== id));
+          } else {
+            setSeminar((prevsSeminar) => prevsSeminar.filter((Seminar: any) => Seminar._id !== id));
+          }
+        } else {
+          if (isKP) {
+            console.error(`Error deleting Kerja Praktik with ID ${id}`);
+          } else {
+            console.error(`Error deleting Seminar with ID ${id}`);
+          }
+        }
+      })
+  }
+
+  // const openDeleteModal = (id: any) => {
+  //   setItemToDelete(id);
+  //   setIsDeleteModalOpen(true);
+  // };
+
   const closeDeleteModal = () => {
     setIsDeleteModalOpen(false);
-    // setItemToDelete(null);
+    setItemToDelete(null);
   };
 
-  const confirmDelete = () => {
-    // if (itemToDelete) {
-    //   handleDeleteUserSubmit(itemToDelete.id);
-    // }
-    closeDeleteModal();
-  };
-  
-    const openAddSeminarModal = () => {
-        setIsKP(false);
-        setIsAddSeminarModalOpen(true);
-    }
-    
-    const confirmAddSeminar = () => {
-        //post to api
-        setIsAddSeminarModalOpen(false);
-    }
-    
-    const openEditSeminarModal = () => {
-        setIsKP(false);
-        setIsEditSeminarModalOpen(true);
-    }
+  // const confirmDelete = (isKP: boolean) => {
+  //   if (itemToDelete) {
+  //     handleDeleteSeminarSubmit(itemToDelete, isKP);
+  //     closeDeleteModal();
+  //   }
+  // };
 
-    const confirmEditSeminar = () => {
-        //patch to api /
-        setIsEditSeminarModalOpen(false);
-    }
 
-    const closeSeminarModal = () => {
-      setIsAddSeminarModalOpen(false);
-      setIsEditSeminarModalOpen(false);
-    }
-  
-    const openAddKPModal = () => {
-        setIsKP(true);
-        setIsAddKPModalOpen(true);
-    }
-    
-    const confirmAddKP = () => {
-        //post to api
-        setIsAddKPModalOpen(false);
-    }
-    
-    const openEditKPModal = () => {
-        setIsKP(true);
-        setIsEditKPModalOpen(true);
-    }
 
-    const confirmEditKP = () => {
-        //patch to api /
-        setIsEditKPModalOpen(false);
-    }
+  const openAddSeminarModal = () => {
+    setIsKP(false);
+    setIsAddSeminarModalOpen(true);
+  }
 
-    const closeKPModal = () => {
-      setIsAddKPModalOpen(false);
-      setIsEditKPModalOpen(false);
-    }
-  
+  const confirmAddSeminar = () => {
+    //post to api
+    setIsAddSeminarModalOpen(false);
+  }
+
+  // const openEditSeminarModal = () => {
+  //   setIsKP(false);
+  //   setIsEditSeminarModalOpen(true);
+  // }
+
+  const confirmEditSeminar = () => {
+    //patch to api /
+    setIsEditSeminarModalOpen(false);
+  }
+
+  const closeSeminarModal = () => {
+    setIsAddSeminarModalOpen(false);
+    setIsEditSeminarModalOpen(false);
+  }
+
+  const openAddKPModal = () => {
+    setIsKP(true);
+    setIsAddKPModalOpen(true);
+  }
+
+  const confirmAddKP = () => {
+    //post to api
+    setIsAddKPModalOpen(false);
+  }
+
+  const openEditKPModal = () => {
+    setIsKP(true);
+    setIsEditKPModalOpen(true);
+  }
+
+  const confirmEditKP = () => {
+    //patch to api /
+    setIsEditKPModalOpen(false);
+  }
+
+  const closeKPModal = () => {
+    setIsAddKPModalOpen(false);
+    setIsEditKPModalOpen(false);
+  }
+
+  const handleLogOut = () => {
+    logout();
+    window.location.reload();
+  }
+
   return (
     <div className="h-screen flex flex-col bg-[#0D6FBC]">
       {/* Top part */}
@@ -111,7 +211,9 @@ const Profile = ({ Name_arg, Nim_arg }:any) => {
           </div>
           <div>
             <hr className="w-[80%] mx-auto m-3 text-grey-300" />
-            <button className="inset-x-0 rounded-xl mx-auto w-[60%] bg-[#0D6FBC] flex flex-row hover:bg-[#4e9edc] mb-5">
+            <button
+              onClick={handleLogOut}
+              className="inset-x-0 rounded-xl mx-auto w-[60%] bg-[#0D6FBC] flex flex-row hover:bg-[#4e9edc] mb-5">
               <IoLogOutOutline
                 color="white"
                 size="30px"
@@ -132,14 +234,21 @@ const Profile = ({ Name_arg, Nim_arg }:any) => {
               <div className="rounded-xl w-full h-full shadow-md mx-auto bg-primary p-3">
                 <div className="flex items-center">
                   <h1 className="mx-1 font-bold text-white text-xl">Seminar</h1>
-                  <CiSquarePlus className="mx-1 mt-1 w-[40px] h-[40px] hover:bg-[#add03f] rounded-md  text-white"  onClick={openAddSeminarModal}/>
+                  <CiSquarePlus className="mx-1 mt-1 w-[40px] h-[40px] hover:bg-[#add03f] rounded-md  text-white" onClick={openAddSeminarModal} />
                 </div>
                 <div className=" mx-auto p-3 max-w-full h-[31vh] overflow-y-auto scrollbar">
-                  <HistoryCard
-                    display_text="JudulKerjaPraktik"
-                    handleDeleteButton={openDeleteModal}
-                    handleEditButton={openEditSeminarModal}
-                  />
+                  {seminar.map(item => (
+                    <HistoryCard
+                      key={item._id}
+                      card={item}
+                      handleDeleteButton={() => {
+                        setItemToDelete(item._id);
+                        setIsDeleteModalOpen(true);
+                        setIsKP(false)
+                      }}
+                      handleEditButton={openEditKPModal}
+                    />
+                  ))}
                 </div>
                 <div className="flex justify-end mx-8"></div>
               </div>
@@ -155,11 +264,18 @@ const Profile = ({ Name_arg, Nim_arg }:any) => {
                   <CiSquarePlus className="mx-1 mt-1 w-[40px] h-[40px] hover:bg-[#add03f] rounded-md text-white" onClick={openAddKPModal} />
                 </div>
                 <div className="mx-auto p-3 max-w-full h-[31vh] overflow-y-auto scrollbar">
-                  <HistoryCard
-                    display_text="JudulKerjaPraktik"
-                    handleDeleteButton={openDeleteModal}
-                    handleEditButton={openEditKPModal}
-                  />
+                  {KerjaPraktik.map(item => (
+                     <HistoryCard
+                     key={item._id}
+                     card={item}
+                     handleDeleteButton={() => {
+                       setItemToDelete(item._id);
+                       setIsDeleteModalOpen(true);
+                       setIsKP(true)
+                     }}
+                     handleEditButton={openEditKPModal}
+                   />
+                  ))}
                 </div>
                 <div className="flex justify-end mx-8"></div>
               </div>
@@ -178,7 +294,12 @@ const Profile = ({ Name_arg, Nim_arg }:any) => {
       <DeleteConfirmationModal
         isOpen={isDeleteModalOpen}
         onClose={closeDeleteModal}
-        onConfirm={confirmDelete}
+        onConfirm={()=>{
+          if (itemToDelete) {
+            handleDeleteSeminarSubmit(itemToDelete, isKP);
+            closeDeleteModal();
+          }
+        }}
       />
       <ModalUser
         isOpen={isAddSeminarModalOpen}
@@ -186,32 +307,32 @@ const Profile = ({ Name_arg, Nim_arg }:any) => {
         title="Add New Seminar"
         action="Add"
         onConfirm={confirmAddSeminar}
-        onClose={closeSeminarModal} 
-       />
+        onClose={closeSeminarModal}
+      />
       <ModalUser
         isOpen={isEditSeminarModalOpen}
         isKP={isKP}
         title="Edit Seminar"
         action="Edit"
-        onConfirm={confirmEditSeminar} 
-        onClose={closeSeminarModal} 
-       />
+        onConfirm={confirmEditSeminar}
+        onClose={closeSeminarModal}
+      />
       <ModalUser //keknya perlu ganti modal (?)
         isOpen={isAddKPModalOpen}
         isKP={isKP}
         title="Add New KP"
         action="Add"
-        onConfirm={confirmAddKP} 
+        onConfirm={confirmAddKP}
         onClose={closeKPModal}
-       />
+      />
       <ModalUser //keknya perlu ganti modal (?)
         isOpen={isEditKPModalOpen}
         isKP={isKP}
         title="Edit KP"
         action="Edit"
-        onConfirm={confirmEditKP} 
+        onConfirm={confirmEditKP}
         onClose={closeKPModal}
-       />
+      />
     </div>
   );
 };

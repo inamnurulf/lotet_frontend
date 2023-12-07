@@ -51,7 +51,7 @@ const Verification: FC<Props> = (props): JSX.Element => {
         }
       );
       if (response.ok) {
-        router.push('/login')
+        router.push('/auth/login')
       }
       else {
         const data = response.json();

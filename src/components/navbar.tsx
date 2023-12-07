@@ -48,7 +48,7 @@ const Navbar = ({ defaultform = true }) => {
   }, [scrollY]);
 
   return (
-    <div className="absolute w-0 self-start h-full z-[100]">
+    <div className="absolute w-0 self-start h-full z-[1]">
       {defaultform ? null : <div className="w-screen md:h-[5vh]"></div>}
       <div className="sticky top-0 w-screen ">
         <div
