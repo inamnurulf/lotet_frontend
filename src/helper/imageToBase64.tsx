@@ -1,10 +1,8 @@
-export function convertImageToBase64({ fileInput, callback }: any) {
-  if (fileInput.files.length > 0) {
-    const reader = new FileReader();
-    reader.onload = (event: any) => {
-      const base64Image = event.target.result;
-      callback(base64Image);
-    };
-    reader.readAsDataURL(fileInput.files[0]);
-  }
+export function convertImageToBase64(file: File, callback: (base64Image: string) => void) {
+  const reader = new FileReader();
+  reader.onload = (event: ProgressEvent<FileReader>) => {
+    const base64Image = event.target?.result as string;
+    callback(base64Image);
+  };
+  reader.readAsDataURL(file);
 }
