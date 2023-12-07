@@ -2,7 +2,7 @@
 import Navbar from '@/components/navbar'
 import SearchBar from '@/components/searchBar'
 import SeminarList from '@/components/seminarLIst'
-import { useEffect, useRef, useState } from 'react'
+import { useState } from 'react'
 
 const Seminar = () => {  
   const [keyword, setKeyword]  = useState('')
