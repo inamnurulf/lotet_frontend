@@ -10,9 +10,10 @@ interface SeminarCardProps {
   title: string;
   date: string;
   location: string;
+  image: string;
 }
 
-const SeminarCard: React.FC<SeminarCardProps> = ({ id, title, date, location }) => {
+const SeminarCard: React.FC<SeminarCardProps> = ({ id, title, date, location, image }) => {
   const dateOnly = new Date(date).toDateString()
   useEffect(() => {
     Aos.init({
@@ -23,10 +24,10 @@ const SeminarCard: React.FC<SeminarCardProps> = ({ id, title, date, location }) 
   return (
     <div data-aos="fade-up" className="">
     <div id={id} className="h-full max-w-md min-w-full md:min-w-0 bg-white rounded-xl overflow-hidden  cursor-pointer shadow-lg hover:shadow-xl hover:scale-105 transition duration-300">
-      <Link href={`./seminar/details/${id}`}>
+      <Link href={`./seminar/${id}`}>
         <div className="m-1 rounded-lg h-40 overflow-hidden justify-center items-center">
           <Image
-            src= {'/seminarImg.png'}
+            src= {image}
             alt = "Search"
             width={386}
             height={200}

@@ -15,7 +15,7 @@ const SeminarDescription: React.FC<SeminarDescriptionProps> = ({title, body, cat
       <div className="rounded-lg h-50 overflow-hidden justify-center items-center mb-4">
         <Image 
         className="w-full"
-        src= {'/seminarImg.png'}
+        src= {image}
         alt="Seminar Logo"
         width={300}
         height={200}

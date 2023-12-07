@@ -18,6 +18,11 @@ const Seminar = () => {
           
         </div>
       <div className='mx-4 flex justify-center'>
+        {
+          keyword &&(
+            <div>{`Search for ${keyword}`}</div>
+          )
+        }
         <SeminarList keyword = {keyword}></SeminarList>
       </div>
       </div>
