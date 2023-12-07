@@ -4,7 +4,6 @@ import Navbar from '@/components/navbar';
 import SeminarInfo from '@/components/seminarInfo';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { usePathname} from 'next/navigation';
 import Seminar from '../page';
 
 interface Seminar {
@@ -23,7 +22,7 @@ interface Seminar {
   username: string;
 }
 
-const SeminarDetails = () => {
+const SeminarDetails = ({params}: any) => {
   const emp: Seminar = {
     _id: '',
     user_id: '',
@@ -39,8 +38,7 @@ const SeminarDetails = () => {
     username: '',
     __v: 0
   }
-  const router = usePathname()
-  const id = router.split('/').pop()
+  const {id} = params
   const [seminar, setSeminar] = useState<Seminar>(emp);
   useEffect(() => {
     if (id && typeof id === 'string') {

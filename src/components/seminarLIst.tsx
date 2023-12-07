@@ -31,6 +31,12 @@ const SeminarList = () =>{
       });
     }, []
   )
+
+  const [searchSeminar, setSearchSeminar] = useState('')
+  
+  const filteredSeminar = response.filter((seminar: Seminar) =>
+    seminar.title.toLowerCase().includes(searchSeminar.toLowerCase())
+  );
   return(
     <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4' >
           {
