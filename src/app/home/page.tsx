@@ -32,10 +32,10 @@ const Home = () => {
     };
   }, []);
   return (
-    <section className="flex items-center flex-col bg-primary max-h-screen md:overflow-x-hidden">
+    <section className="flex items-center flex-col bg-primary !w-full !p-0 !m-0">
       <Navbar defaultform={false} />
       <div className="md:flex w-full">
-        <div className="md:w-[50vw] flex flex-col justify-center items-start min-h-screen">
+        <div className="md:w-1/2 flex flex-col justify-center items-start min-h-screen">
           <div className="left-[15%] relative" >
             <div className="flex items-end" data-aos="fade-up">
               <div className="text-white text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-semibold">
@@ -56,7 +56,7 @@ const Home = () => {
             </div>
           </div>
         </div>
-        <div className="bg-secondary md:w-[50vw] min-h-screen flex items-center">
+        <div className="bg-secondary md:w-1/2 min-h-screen flex items-center">
           <div className="mx-auto" data-aos="fade-up">
             <div className="text-white text-2xl px-7 py-2 font-semibold" >
               Whats New?

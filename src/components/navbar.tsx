@@ -40,6 +40,7 @@ const Navbar = ({ defaultform = true }) => {
   }, []);
 
   useEffect(() => {
+    console.log(scrollY)
     if (defaultform === true) {
       setIsFaded(true);
     } else {
@@ -48,7 +49,7 @@ const Navbar = ({ defaultform = true }) => {
   }, [scrollY]);
 
   return (
-    <div className="absolute w-0 self-start h-full z-01">
+    <div className="absolute w-0 self-start h-full z-[100]">
       {defaultform ? null : <div className="w-screen md:h-[5vh]"></div>}
       <div className="sticky top-0 w-screen ">
         <div
@@ -68,19 +69,19 @@ const Navbar = ({ defaultform = true }) => {
           <div className="justify-between hidden md:flex">
             <Link
               href="/home"
-              className="lg:text-xl text-primary mx-5 hover:bg-primary hover:text-white lg:px-3 duration-200  rounded-xl font-semibold"
+              className="lg:text-xl text-primary mx-5 hover:bg-primary hover:text-white lg:px-3 duration-200 rounded   rounded-xl font-semibold"
             >
               Home
             </Link>
             <Link
               href="/kerjapraktik"
-              className="lg:text-xl text-primary mx-5 hover:bg-primary hover:text-white lg:px-3 duration-200 rounded-xl font-semibold"
+              className="lg:text-xl text-primary mx-5 hover:bg-primary hover:text-white lg:px-3 duration-200 rounded  rounded-xl font-semibold"
             >
               Kerja Praktik
             </Link>
             <Link
               href="/seminar"
-              className="lg:text-xl text-primary mx-5 hover:bg-primary hover:text-white lg:px-3 duration-200 rounded-xl font-semibold"
+              className="lg:text-xl text-primary mx-5 hover:bg-primary hover:text-white lg:px-3 duration-200 rounded  rounded-xl font-semibold"
             >
               Seminar
             </Link>
@@ -89,7 +90,7 @@ const Navbar = ({ defaultform = true }) => {
             href="/profile"
             className="w-[150px] text-primary text-center justify-center hidden md:flex "
           >
-            <div className="hover:bg-primary hover:text-white px-3 duration-200 rounded-xl font-semibold lg:text-xl">
+            <div className="hover:bg-primary hover:text-white px-3 duration-200 rounded  rounded-xl font-semibold lg:text-xl">
               Profile
             </div>
           </Link>
@@ -98,7 +99,7 @@ const Navbar = ({ defaultform = true }) => {
               href="/auth/login"
               className="w-[150px] text-primary text-center justify-center hidden md:flex "
             >
-              <div className="hover:bg-primary hover:text-white px-3 duration-200 rounded-xl font-semibold lg:text-xl">
+              <div className="hover:bg-primary hover:text-white px-3 duration-200 rounded  rounded-xl font-semibold lg:text-xl">
                 Login
               </div>
             </Link>}

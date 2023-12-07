@@ -72,3 +72,8 @@
     transform: rotate(360deg);
   }
 }
+
+body{
+  width: 100vw;
+  overflow-x: hidden;
+}
