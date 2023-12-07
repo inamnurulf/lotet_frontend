@@ -40,7 +40,9 @@ const SeminarDetails = ({params}: any) => {
   }
   const {id} = params
   const [seminar, setSeminar] = useState<Seminar>(emp);
+  const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
+    setIsLoading(true)
     if (id && typeof id === 'string') {
       axios.get<Seminar>(`${process.env.NEXT_PUBLIC_BACKEND_URL}seminar/${id}`)
         .then(res => {
@@ -49,19 +51,23 @@ const SeminarDetails = ({params}: any) => {
         .catch(error => {
           console.error('Error fetching data:', error);
           console.log('Error response:', error.response); // Log the response for debugging
-        });
+        }).finally( () =>{
+          setIsLoading(false)
+          }   
+        );
     }
   }, [id]);
-
-  const dateOnly = new Date(seminar.eventTime).toDateString()
   return (
     <div className='flex flex-col bg-primary items-center overflow-hidden min-w-fit min-h-screen'>
       <Navbar defaultform={false} />
-      <div className='justify-center grid grid-cols-1 md:grid-cols-2 gap-8 mt-32 mx-8'>
-        {/* Pass the ID to the components that require it */}
-        <SeminarDescription title={seminar?.title} body={seminar?.details} category={seminar?.category} image={seminar?.image}/>
-        <SeminarInfo users={seminar?.username} dateTime={seminar?.eventTime} location={seminar.location} additional={seminar.additional}/>
-      </div>
+      {
+      isLoading ? <div className='spinner justify-center items-center min-h-full mt-52 '></div> : 
+        <div className='justify-center grid grid-cols-1 md:grid-cols-2 gap-8 mt-32 mx-8'>
+          <SeminarDescription title={seminar?.title} body={seminar?.details} category={seminar?.category} image={seminar?.image}/>
+          <SeminarInfo users={seminar?.username} dateTime={seminar?.eventTime} location={seminar.location} additional={seminar.additional}/>
+        </div>
+      }
+      
     </div>
   );
 };
