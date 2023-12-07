@@ -16,7 +16,7 @@ const SeminarCard: React.FC<SeminarCardProps> = ({ id, title, date, location }) 
   const dateOnly = new Date(date).toDateString()
   useEffect(() => {
     Aos.init({
-      duration: 800,
+      duration: 400,
       easing: 'ease-out'
     });
   }, []);

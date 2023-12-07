@@ -13,7 +13,7 @@ const SeminarInfo: React.FC<SeminarInfoProps> = ({users, dateTime, location, add
   const date = new Date(dateTime).toDateString()
   const time = new Date(dateTime).toLocaleTimeString()
   return(
-    <div className="bg-gray-100 rounded-xl max-w-lg">
+    <div className="bg-gray-100 rounded-xl max-w-lg overflow-clip">
       <div className="flex flex-col p-8 w-full gap-8">
       <h3 className="font-bold text-lg md:text-xl">Seminar Details</h3>
       <Information type="Date" content={date}></Information>
@@ -21,7 +21,7 @@ const SeminarInfo: React.FC<SeminarInfoProps> = ({users, dateTime, location, add
       <Information type="Location" content={location}></Information>
       <Information type = 'Speakers' content={users}></Information>
       <Information type='Additional' content={additional}></Information>
-      <div className="flex-row flex gap-4 items-center justify-center">
+      <div className="flex gap-4 mb-4 items-center">
         <SolidButton name="Add to Calendar"></SolidButton>
         <SolidButton name="Share"></SolidButton>
       </div>

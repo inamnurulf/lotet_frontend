@@ -1,6 +1,5 @@
 import Image from "next/image";
 import CategoryButton from "./atom/categoryButton";
-import imgs from '../../public/seminarImg.png'
 interface SeminarDescriptionProps{
   title: string,
   body: string,
