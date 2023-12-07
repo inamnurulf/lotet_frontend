@@ -34,10 +34,10 @@ interface KerjaPraktik {
 }
 
 const Profile = ({ Name_arg, Nim_arg }: any) => {
-  const display_Name = Name_arg || "NamaNamaNama";
-  const display_Nim = Nim_arg || "NimNimNim";
 
   const [isKP, setIsKP] = useState(false);
+  const [display_Name, setdisplay_Name] = useState("Loading...");
+  const [display_Nim, setdisplay_Nim] = useState("Loading...");
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isAddSeminarModalOpen, setIsAddSeminarModalOpen] = useState(false);
   const [isEditSeminarModalOpen, setIsEditSeminarModalOpen] = useState(false);
@@ -46,14 +46,18 @@ const Profile = ({ Name_arg, Nim_arg }: any) => {
   const [itemToDelete, setItemToDelete] = useState<any>(null);
 
   const [seminar, setSeminar] = useState<Seminar[]>([]);
-  const { logout, _id, authLoad } = useAuth()
+  const { logout, _id, authLoad, name, nim } = useAuth()
+
+
   useEffect(
     () => {
       if (!authLoad) {
+        setdisplay_Nim(nim)
+        setdisplay_Name(name)
         if (_id) {
           axios.get<Seminar[]>(`${process.env.NEXT_PUBLIC_BACKEND_URL}seminar/search/byUserID/${_id}`)
             .then(res => {
-              setSeminar(res.data); // Assuming the response is an array
+              setSeminar(res.data);
             })
             .catch(error => {
               console.error('Error fetching data:', error);
@@ -69,7 +73,7 @@ const Profile = ({ Name_arg, Nim_arg }: any) => {
         if (_id) {
           axios.get<KerjaPraktik[]>(`${process.env.NEXT_PUBLIC_BACKEND_URL}kerjaPraktik/search/byUserID/${_id}`)
             .then(res => {
-              setKerjaPraktik(res.data); // Assuming the response is an array
+              setKerjaPraktik(res.data);
             })
             .catch(error => {
               console.error('Error fetching data:', error);
@@ -173,15 +177,66 @@ const Profile = ({ Name_arg, Nim_arg }: any) => {
     setIsAddSeminarModalOpen(false);
   }
 
-  // const openEditSeminarModal = () => {
-  //   setIsKP(false);
-  //   setIsEditSeminarModalOpen(true);
-  // }
-
-  const confirmEditSeminar = () => {
-    //patch to api /
-    setIsEditSeminarModalOpen(false);
+  const openEditSeminarModal = () => {
+    setIsKP(false);
+    setIsEditSeminarModalOpen(true);
   }
+
+  const confirmEditSeminar = async (card: any) => {
+  
+    try {
+      const requestBody: any = {
+        user_id: _id,
+      };
+  
+      if (card.name) {
+        requestBody.title = card.name;
+      }
+  
+      if (card.details) {
+        requestBody.details = card.details;
+      }
+  
+      if (card.image) {
+        requestBody.image = card.image;
+      }
+  
+      if (card.eventTime) {
+        requestBody.eventTime = card.eventTime;
+      }
+  
+      if (card.category) {
+        requestBody.category = card.category;
+      }
+  
+      if (card.location) {
+        requestBody.location = card.location;
+      }
+  
+      if (card.additional) {
+        requestBody.additional = card.additional;
+      }
+  
+      const response = await fetch(
+        process.env.NEXT_PUBLIC_BACKEND_URL + "seminar/" + itemToDelete,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(requestBody),
+        }
+      );
+  
+      const data = await response.json();
+  
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsEditSeminarModalOpen(false);
+    }
+  };
+  
 
   const closeSeminarModal = () => {
     setIsAddSeminarModalOpen(false);
@@ -193,7 +248,7 @@ const Profile = ({ Name_arg, Nim_arg }: any) => {
     setIsAddKPModalOpen(true);
   }
 
-  const confirmAddKP =async (card:any) => {
+  const confirmAddKP = async (card: any) => {
     try {
       console.log({
         user_id: _id,
@@ -230,13 +285,47 @@ const Profile = ({ Name_arg, Nim_arg }: any) => {
     setIsAddKPModalOpen(false);
   }
 
-  const openEditKPModal = () => {
-    setIsKP(true);
-    setIsEditKPModalOpen(true);
-  }
-
-  const confirmEditKP = () => {
+  const confirmEditKP = async (card: any) => {
     //patch to api /
+    try {
+      const requestBody: any = {
+        user_id: _id,
+      };
+
+      if (card.name) {
+        requestBody.title = card.name;
+      }
+
+      if (card.details) {
+        requestBody.details = card.details;
+      }
+
+      if (card.image) {
+        requestBody.image = card.image;
+      }
+
+      if (card.category) {
+        requestBody.category = card.category;
+      }
+
+      const response = await fetch(
+        process.env.NEXT_PUBLIC_BACKEND_URL + "kerjaPraktik/" + itemToDelete,
+
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(requestBody),
+        }
+      );
+
+      const data = await response.json();
+
+    } catch (error) {
+      console.log(error);
+    } finally {
+    }
     setIsEditKPModalOpen(false);
   }
 
@@ -312,7 +401,11 @@ const Profile = ({ Name_arg, Nim_arg }: any) => {
                         setIsDeleteModalOpen(true);
                         setIsKP(false)
                       }}
-                      handleEditButton={openEditKPModal}
+                      handleEditButton={() => {
+                        setItemToDelete(item._id);
+                        setIsKP(false);
+                        setIsEditSeminarModalOpen(true);
+                      }}
                     />
                   ))}
                 </div>
@@ -327,7 +420,7 @@ const Profile = ({ Name_arg, Nim_arg }: any) => {
                   <h1 className="mx-1 font-bold text-white text-xl">
                     Kerja Praktik
                   </h1>
-                  <CiSquarePlus className="mx-1 mt-1 w-[40px] h-[40px] hover:bg-[#add03f] rounded-md text-white" onClick={openAddKPModal} />
+                  <CiSquarePlus className="mxsetIsEditKPModalOpen-1 mt-1 w-[40px] h-[40px] hover:bg-[#add03f] rounded-md text-white" onClick={openAddKPModal} />
                 </div>
                 <div className="mx-auto p-3 max-w-full h-[31vh] overflow-y-auto scrollbar">
                   {KerjaPraktik.map(item => (
@@ -339,7 +432,11 @@ const Profile = ({ Name_arg, Nim_arg }: any) => {
                         setIsDeleteModalOpen(true);
                         setIsKP(true)
                       }}
-                      handleEditButton={openEditKPModal}
+                      handleEditButton={() => {
+                        setItemToDelete(item._id);
+                        setIsKP(true);
+                        setIsEditKPModalOpen(true);
+                      }}
                     />
                   ))}
                 </div>

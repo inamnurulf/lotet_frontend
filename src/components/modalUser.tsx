@@ -6,10 +6,6 @@ import { useEffect, useState } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
-// interface ModalUserSeminarProps {
-//   title: string,
-//   action: string,
-// }
 
 const ModalUser = ({ title, action, isOpen, onClose, onConfirm, isKP }: any) => {
   if (!isOpen) return null;
@@ -21,7 +17,7 @@ const ModalUser = ({ title, action, isOpen, onClose, onConfirm, isKP }: any) => 
   const [titleData, settitleData] = useState<string | null>(null);
   const [description, setDescription] = useState<string | null>(null);
   const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
-  const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
+  const [selectedOptions, setSelectedOptions] = useState<string[]|null>(null);
 
   useEffect(() => {
     AOS.init({
@@ -46,11 +42,6 @@ const ModalUser = ({ title, action, isOpen, onClose, onConfirm, isKP }: any) => 
   const handleDescriptionChange = (event: { target: { value: any } }) => {
     const { value } = event.target;
     setDescription(() => (value));
-  }
-
-  const handleTitleChange = (event: { target: { value: any } }) => {
-    const { value } = event.target;
-    settitleData(() => (value));
   }
 
   const handleAdditionalChange = (event: { target: { value: any } }) => {
@@ -79,13 +70,9 @@ const ModalUser = ({ title, action, isOpen, onClose, onConfirm, isKP }: any) => 
       additional: additional,
       location: location
     })
-    // console.log(previewUrl);
-    // console.log(selectedDate);
-    // console.log(selectedOptions);
   }
 
   useEffect(() => {
-    // console.log(selectedOptions)
   }, [selectedOptions])
 
   return (
