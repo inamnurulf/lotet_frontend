@@ -98,7 +98,7 @@ const ImageUploadForm: React.FC<ImageUploadFormProps> = ({ onImageChange }) => {
     <form 
       ref={formRef}
       onSubmit={handleSubmit}
-      className='w-full h-52 overflow-hidden bg-zinc-300 rounded relative mb-2'
+      className='w-full h-full overflow-hidden bg-zinc-300 rounded relative mb-2'
       style={{ backgroundImage: `url(${previewUrl})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
     >
       <input 
