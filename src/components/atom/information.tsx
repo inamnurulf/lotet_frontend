@@ -11,7 +11,7 @@ const getIcon = (type: string): IconType | null => {
       return FaCalendar;
     case 'Time':
       return FaClock;
-    case 'Speakers':
+    case 'Speaker':
       return FaPerson;
     case 'Location':
       return FaLocationPin;
@@ -28,7 +28,7 @@ const Information: React.FC<InformationProps> = ({type, content}) =>{
   }
   return(
     <div className="flex flex-row items-center gap-4">
-      <div className="bg-">
+      <div className="">
         <IconComponent size={40} className="text-secondary"></IconComponent>
       </div>
       <div className="flex flex-col">
