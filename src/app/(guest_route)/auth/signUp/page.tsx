@@ -3,6 +3,8 @@ import React, { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/auth-context";
 import PasswordMatch from "@/components/passwordMatch";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const SignUp = () => {
   const { login } = useAuth();
@@ -19,6 +21,12 @@ const SignUp = () => {
   const [buttonDisabled, setButtonDisabled] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
   const [samePassword, setSamePassword] = React.useState(true);
+
+  useEffect(() => {
+    AOS.init({
+      duration: 800,
+    });
+  },[]);
 
   const onSignUp = async () => {
     try {
@@ -101,7 +109,7 @@ const SignUp = () => {
   return (
     <section className="backgroundsection">
       <div className="flex justify-center items-center h-screen">
-        <form className="bg-white rounded-lg shadow-lg p-8">
+        <form className="bg-white rounded-lg shadow-lg p-8" data-aos="fade-up">
           <h2 className="text-center text-2xl font-bold mb-4">
             {loading ? "Loading..." : "Sign Up"}
           </h2>
@@ -124,7 +132,7 @@ const SignUp = () => {
           <div className="mb-4">
             <label className="block text-gray-700 font-semibold mb-2">
               {/* for="email" */}
-              Nama Lengkap :
+              Full Name
             </label>
             <input
               className="appearance-none bg-zinc-300 border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"

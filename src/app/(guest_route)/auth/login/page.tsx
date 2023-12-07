@@ -3,6 +3,8 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/auth-context";
 import PasswordMatch from "@/components/passwordMatch";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const SignIn = () => {
   const { login } = useAuth();
@@ -12,6 +14,12 @@ const SignIn = () => {
   const [passwordCheck, setPasswordCheck] = React.useState(true);
 
   const router = useRouter();
+
+  useEffect(() => {
+    AOS.init({
+      duration: 800,
+    });
+  },[]);
 
   const handleChangeEmail = (e:any) => {
     setEmail(e.target.value);
@@ -74,7 +82,7 @@ const SignIn = () => {
   return (
     <section className="bg-primary backgroundsection">
       <div className="flex justify-center items-center h-screen">
-        <form className="bg-white rounded-lg shadow-lg p-8">
+        <form className="bg-white rounded-lg shadow-lg p-8" data-aos="fade-up">
           <h2 className="text-center text-2xl font-bold mb-4">Login</h2>
           <div className="mb-4">
             {passwordCheck ? <p></p>:<PasswordMatch message="Wrong email or password!" />}

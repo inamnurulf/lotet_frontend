@@ -3,16 +3,12 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { HiOutlineMenuAlt3 } from "react-icons/hi";
 import { AiOutlineClose } from "react-icons/ai";
-import { useAuth } from "@/context/auth-context";
 import Link from "next/link";
-import Logo from "../../public/Logo.svg"
 
 const Navbar = ({ defaultform = true }) => {
   const [scrollY, setScrollY] = useState(0);
   const [isFaded, setIsFaded] = useState(false);
   const [isOpen, setIsOpen] = useState(true);
-
-  const { logout, token, name } = useAuth();
 
   const fadeEffect = {
     opacity: isFaded ? 1 : 0,
@@ -22,10 +18,6 @@ const Navbar = ({ defaultform = true }) => {
   const handleNavbar = () => {
     setIsOpen(!isOpen);
   };
-
-  const handleLogout=()=>{
-    logout()
-  }
 
   const handleScroll = () => {
     setScrollY(window.scrollY);
@@ -48,7 +40,7 @@ const Navbar = ({ defaultform = true }) => {
   }, [scrollY]);
 
   return (
-    <div className="absolute w-0 self-start h-full z-[100]">
+    <div className="absolute w-0 self-start h-full z-01">
       {defaultform ? null : <div className="w-screen md:h-[5vh]"></div>}
       <div className="sticky top-0 w-screen ">
         <div
@@ -58,7 +50,7 @@ const Navbar = ({ defaultform = true }) => {
         <div className={`relative bg-white w-screen ${defaultform ? " w-full " : " md:w-[90vw] md:rounded-full "}  mx-auto p-2 h-[70px]  top-0 flex justify-between items-center`}>
           <div>
             <Image
-              src={Logo}
+              src={"./Logo.svg"}
               width={155}
               alt="Logo"
               height={64}
@@ -85,23 +77,14 @@ const Navbar = ({ defaultform = true }) => {
               Seminar
             </Link>
           </div>
-          {token ? <Link
-            href="/profile"
+          <Link
+            href="/auth/login"
             className="w-[150px] text-primary text-center justify-center hidden md:flex "
           >
             <div className="hover:bg-primary hover:text-white px-3 duration-200 rounded-xl font-semibold lg:text-xl">
-              Profile
+              Login
             </div>
           </Link>
-            :
-            <Link
-              href="/auth/login"
-              className="w-[150px] text-primary text-center justify-center hidden md:flex "
-            >
-              <div className="hover:bg-primary hover:text-white px-3 duration-200 rounded-xl font-semibold lg:text-xl">
-                Login
-              </div>
-            </Link>}
           <div className="text-3xl md:hidden px-3 ">
             {isOpen ? (
               <HiOutlineMenuAlt3 onClick={handleNavbar} />
@@ -131,20 +114,12 @@ const Navbar = ({ defaultform = true }) => {
               >
                 Seminar
               </a>
-              {token ?
-                <a
-                  className="mx-3 hover:bg-primary hover:text-white w-full p-3 "
-                  href="/profile"
-                >
-                  Logout
-                </a>
-                :
-                <a
-                  href="/auth/login"
-                  className="mx-3 hover:bg-primary hover:text-white w-full p-3 "
-                >
-                  Login
-                </a>}
+              <a
+                href="/auth/login"
+                className="mx-3 hover:bg-primary hover:text-white w-full p-3 "
+              >
+                Login
+              </a>
             </div>
           </div>
         ) : null}
