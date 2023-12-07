@@ -1,10 +1,8 @@
 'use client'
-import KPCard from '@/components/kpCard'
+import KPList from '@/components/kpList'
 import Navbar from '@/components/navbar'
 import SearchBar from '@/components/searchBar'
-import KPDescription from '@/components/atom/kpDescription'
-import React, { useEffect, useState } from 'react'
-import axios from 'axios'
+import React, { useState } from 'react'
 
 interface KerjaPraktik{
   _id: string;
@@ -12,7 +10,7 @@ interface KerjaPraktik{
   title: string;
   details: string;
   image: string;
-  eventTime: string;
+  date: string;
   category: string[];
   createdAt: string;
   updatedAt: string;
@@ -21,38 +19,23 @@ interface KerjaPraktik{
 
 const KerjaPraktik = () => {
 
-  const [response, setResponse] = useState<KerjaPraktik[]>([]);
-  useEffect(
-    () =>{
-      axios.get<KerjaPraktik[]>(`${process.env.NEXT_PUBLIC_BACKEND_URL}kerjapraktik`)
-      .then(res => {
-        console.log(res)
-        setResponse(res.data);
-      })
-      .catch(error => {
-        console.error('Error fetching data:', error);
-      });
-    }, []
-  )
-
-
+  const [keyword, setKeyword]  = useState('')
+  const handleSearch = (value: string) =>{
+    setKeyword(value)
+  }
 
   return (
     <div className='flex items-center flex-col overflow-hidden bg-primary min-h-screen'>
       <Navbar defaultform = {false}></Navbar>
       
-      <div className='mt-8 w-1/3 min-w-fit md:min-w-0 flex justify-center'>
+      <div className='mt-10 md:w-1/3 w-3/4 mx-4 flex justify-center mb-4'>
         <SearchBar></SearchBar>
       </div>
 
       <div className='mx-12 flex justify-center'>
         <div className='grid grid-cols-1'>
 
-          {
-            response.map(item => (
-              <KPCard key={item.user_id} title={item.title} date={item.eventTime} location='location here' company='company name here'/>
-            ))
-          }
+        <KPList keyword = {keyword}></KPList>
 
           </div>
       </div>

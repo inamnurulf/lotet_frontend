@@ -2,6 +2,7 @@
 import React, { useState, FC, useRef, useEffect } from "react";
 import { useAuth } from "@/context/auth-context";
 import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
 
 // const maxCodeLength = 6;
@@ -51,6 +52,12 @@ const Verification: FC<Props> = (props): JSX.Element => {
         }
       );
       if (response.ok) {
+        toast("Verified!!! ✨", {
+          hideProgressBar: false,
+          autoClose: 2000,
+          type: "success",
+          theme: "colored",
+        });
         router.push('/auth/login')
       }
       else {

@@ -1,19 +1,19 @@
 'use client'
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import { ChangeEvent, useRef, KeyboardEvent } from "react";
 
 const SearchBar = ({onSearch}: any) => {
   const searchRef = useRef<HTMLInputElement>(null);
 
-  const handleChange = () => {
-
-  };
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) =>{
     if(e.key == 'Enter'){
       onSearch(searchRef.current?.value)
     } 
+  }
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) =>{
+    onSearch(searchRef.current?.value)
   }
 
   return (
@@ -34,6 +34,7 @@ const SearchBar = ({onSearch}: any) => {
             className="flex items-center w-full h-10 text-sm bg-gray-100 focus:outline-none"
             placeholder="Search"
             onKeyDown={handleKeyDown}
+            onChange={handleChange}
           />
         </div>
       </div>

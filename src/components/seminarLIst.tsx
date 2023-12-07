@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import SeminarCard from "./atom/seminarCard"
 import axios from 'axios'
+import Loading from '../app/loading'
 
 interface Seminar{
   _id: string;
@@ -20,29 +21,43 @@ interface Seminar{
 
 const SeminarList = ({keyword}: any) =>{
   const [response, setResponse] = useState<Seminar[]>([]);
-  useEffect(
-    () =>{
+  const [isLoading, setIsLoading] = useState(true);
+  useEffect(() => {
+    setIsLoading(true);
+    setResponse([]); // Clear previous response
+
+    const fetchData = async () => {
       let endpoint = `${process.env.NEXT_PUBLIC_BACKEND_URL}seminar`;
-      if (keyword != '' && keyword != null) {
+      if (keyword && keyword.trim() !== '') {
         endpoint = `${process.env.NEXT_PUBLIC_BACKEND_URL}seminar/search/byKeyword/${keyword}`;
       }
-      axios.get<Seminar[]>(endpoint)
-      .then(res => {
-        setResponse(res.data); // Assuming the response is an array
-      })
-      .catch(error => {
+
+      try {
+        const res = await axios.get<Seminar[]>(endpoint);
+        setResponse(res.data);
+      } catch (error) {
         console.error('Error fetching data:', error);
-      });
-    }, [keyword]
-  )
+      } finally {
+        setIsLoading(false)
+      }
+    };
+
+    // Simulating a delay of 2 seconds using setTimeout
+    setTimeout(fetchData, 2000);
+  }, [keyword]);
+
   return(
-    <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4' >
+    <div className=''>
+      {isLoading ? <div className='spinner justify-center items-center min-h-full'></div> : null}
+      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'> 
           {
             response.map(item => (
-              <SeminarCard key={item._id} id = {item._id} title={item.title} date={item.eventTime} location={item.location? item.location: ''}/>
+              <SeminarCard key={item._id} id = {item._id} title={item.title} date={item.eventTime} location={item.location? item.location: ''} image={item.image}/>
             ))
           }
+      </div>
     </div>
+    
   )
 }
 export default SeminarList

@@ -1,6 +1,8 @@
-import CategoryButton from "./atom/categoryButton"
+'use client'
+import { useEffect } from "react"
 import Information from "./atom/information"
 import SolidButton from "./atom/solidButton"
+import Aos from "aos"
 
 interface SeminarInfoProps{
   users: string | string[]
@@ -12,6 +14,12 @@ interface SeminarInfoProps{
 const SeminarInfo: React.FC<SeminarInfoProps> = ({users, dateTime, location, additional}) =>{
   const date = new Date(dateTime).toDateString()
   const time = new Date(dateTime).toLocaleTimeString()
+  useEffect(() => {
+    Aos.init({
+      duration: 400,
+      easing: 'ease-out'
+    });
+  }, []);
   return(
     <div className="bg-white rounded-xl max-w-lg overflow-clip">
       <div className="flex flex-col p-8 w-full gap-8">
