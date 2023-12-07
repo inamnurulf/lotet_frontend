@@ -44,32 +44,39 @@ const Profile = ({ Name_arg, Nim_arg }: any) => {
   const [isAddKPModalOpen, setIsAddKPModalOpen] = useState(false);
   const [isEditKPModalOpen, setIsEditKPModalOpen] = useState(false);
   const [itemToDelete, setItemToDelete] = useState<any>(null);
-  const { logout } = useAuth()
 
   const [seminar, setSeminar] = useState<Seminar[]>([]);
+  const { logout, _id, authLoad } = useAuth()
   useEffect(
     () => {
-      axios.get<Seminar[]>(`${process.env.NEXT_PUBLIC_BACKEND_URL}seminar/search/byUserID/65150f9f865eb74f1701bf73`)
-        .then(res => {
-          setSeminar(res.data); // Assuming the response is an array
-        })
-        .catch(error => {
-          console.error('Error fetching data:', error);
-        });
-    }, []
-  )
+      if (!authLoad) {
+        if (_id) {
+          axios.get<Seminar[]>(`${process.env.NEXT_PUBLIC_BACKEND_URL}seminar/search/byUserID/${_id}`)
+            .then(res => {
+              setSeminar(res.data); // Assuming the response is an array
+            })
+            .catch(error => {
+              console.error('Error fetching data:', error);
+            });
+        }
+      }
+    }, [authLoad])
 
   const [KerjaPraktik, setKerjaPraktik] = useState<KerjaPraktik[]>([]);
   useEffect(
     () => {
-      axios.get<KerjaPraktik[]>(`${process.env.NEXT_PUBLIC_BACKEND_URL}kerjaPraktik/search/byUserID/651516da7c566267bfd647f3`)
-        .then(res => {
-          setKerjaPraktik(res.data); // Assuming the response is an array
-        })
-        .catch(error => {
-          console.error('Error fetching data:', error);
-        });
-    }, []
+      if (!authLoad) {
+        if (_id) {
+          axios.get<KerjaPraktik[]>(`${process.env.NEXT_PUBLIC_BACKEND_URL}kerjaPraktik/search/byUserID/${_id}`)
+            .then(res => {
+              setKerjaPraktik(res.data); // Assuming the response is an array
+            })
+            .catch(error => {
+              console.error('Error fetching data:', error);
+            });
+        }
+      }
+    }, [authLoad]
   )
 
   //Deletion-related function
@@ -84,7 +91,7 @@ const Profile = ({ Name_arg, Nim_arg }: any) => {
     axios.delete(API_URL)
       .then((response) => {
         console.log(response)
-        if (response.status==200) {
+        if (response.status == 200) {
           // setUsers((prevUsers) =>
           //   prevUsers.filter((user: any) => user.id !== userId)
           // );
@@ -134,8 +141,45 @@ const Profile = ({ Name_arg, Nim_arg }: any) => {
     setIsAddSeminarModalOpen(true);
   }
 
-  const confirmAddSeminar = () => {
-    //post to api
+  const confirmAddSeminar = async (card: any) => {
+    try {
+      console.log({
+        user_id: _id,
+        title: card.name,
+        details: card.details,
+        image: card.image,
+        eventTime: card.eventTime,
+        category: card.category,
+        location: card.location,
+        additional: card.additional,
+      })
+      const response = await fetch(
+        process.env.NEXT_PUBLIC_BACKEND_URL + "seminar",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            user_id: _id,
+            title: card.name,
+            details: card.details,
+            image: card.image,
+            eventTime: card.eventTime,
+            category: card.category,
+            location: card.location,
+            additional: card.additional,
+          }),
+        }
+      );
+
+      const data = await response.json();
+      console.log(data)
+
+    } catch (error) {
+      console.log(error);
+    } finally {
+    }
     setIsAddSeminarModalOpen(false);
   }
 
@@ -265,16 +309,16 @@ const Profile = ({ Name_arg, Nim_arg }: any) => {
                 </div>
                 <div className="mx-auto p-3 max-w-full h-[31vh] overflow-y-auto scrollbar">
                   {KerjaPraktik.map(item => (
-                     <HistoryCard
-                     key={item._id}
-                     card={item}
-                     handleDeleteButton={() => {
-                       setItemToDelete(item._id);
-                       setIsDeleteModalOpen(true);
-                       setIsKP(true)
-                     }}
-                     handleEditButton={openEditKPModal}
-                   />
+                    <HistoryCard
+                      key={item._id}
+                      card={item}
+                      handleDeleteButton={() => {
+                        setItemToDelete(item._id);
+                        setIsDeleteModalOpen(true);
+                        setIsKP(true)
+                      }}
+                      handleEditButton={openEditKPModal}
+                    />
                   ))}
                 </div>
                 <div className="flex justify-end mx-8"></div>
@@ -294,7 +338,7 @@ const Profile = ({ Name_arg, Nim_arg }: any) => {
       <DeleteConfirmationModal
         isOpen={isDeleteModalOpen}
         onClose={closeDeleteModal}
-        onConfirm={()=>{
+        onConfirm={() => {
           if (itemToDelete) {
             handleDeleteSeminarSubmit(itemToDelete, isKP);
             closeDeleteModal();

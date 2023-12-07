@@ -5,6 +5,7 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [name, setName] = useState(null);
+  const [_id, set_id] = useState(null);
   const [email, setEmail] = useState(null);
   const [role, setRole] = useState(null);
   const [nim, setNim] = useState(null);
@@ -14,6 +15,7 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const storedName = localStorage.getItem('name');
+    const stored_id = localStorage.getItem('_id');
     const storedRole = localStorage.getItem('role');
     const storedEmail = localStorage.getItem('email');
     const storedNim = localStorage.getItem('nim');
@@ -22,6 +24,7 @@ export const AuthProvider = ({ children }) => {
 
     if (storedToken) {
       setName(storedName);
+      set_id(stored_id);
       setRole(storedRole);
       setEmail(storedEmail);
       setNim(storedNim);
@@ -33,6 +36,7 @@ export const AuthProvider = ({ children }) => {
 
   const login = (userData) => {
     setName(userData?.name);
+    set_id(userData?._id);
     setRole(userData?.role);
     setEmail(userData?.email);
     setNim(userData?.nim);
@@ -41,6 +45,7 @@ export const AuthProvider = ({ children }) => {
 
     localStorage.setItem('name', userData.name);
     localStorage.setItem('role', userData.role);
+    localStorage.setItem('_id', userData._id);
     localStorage.setItem('email', userData.email);
     localStorage.setItem('nim', userData.nim);
     localStorage.setItem('verified', userData.verified);
@@ -49,6 +54,7 @@ export const AuthProvider = ({ children }) => {
 
   const logout = () => {
     setName(null);
+    set_id(null);
     setRole(null);
     setEmail(null);
     setNim(null);
@@ -56,6 +62,7 @@ export const AuthProvider = ({ children }) => {
     setToken(null);
 
     localStorage.removeItem('name');
+    localStorage.removeItem('_id');
     localStorage.removeItem('role');
     localStorage.removeItem('email');
     localStorage.removeItem('nim');
@@ -71,6 +78,7 @@ export const AuthProvider = ({ children }) => {
     verified,
     token,
     authLoad,
+    _id,
     login,
     logout,
   };
