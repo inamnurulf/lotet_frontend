@@ -50,7 +50,6 @@ const SeminarList = ({keyword}: any) =>{
     <div className=''>
       {isLoading ? <div className='spinner justify-center items-center min-h-full'></div> : null}
       <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'> 
-      
           {
             response.map(item => (
               <SeminarCard key={item._id} id = {item._id} title={item.title} date={item.eventTime} location={item.location? item.location: ''} image={item.image}/>
