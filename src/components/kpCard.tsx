@@ -1,31 +1,30 @@
+'use client'
 import Image from "next/image";
 import Link from "next/link";
 
 interface KPCardProps {
-  key: string;
+  id: string;
   title: string;
-  company: string;
   date: string;
-  location: string;
 }
 
-const KPCard: React.FC<KPCardProps> = ({ key, title, company, date, location }) => {
+const KPCard: React.FC<KPCardProps> = ({ id, title, date }) => {
   return (
     <div
-      key={key}
+      id={id}
       className="bg-white w-full md:w-[500px] lg:w-[700px] xl:w-[900px] mx-auto flex items-center justify-between px-5 py-4 rounded-md
   overflow-hidden shadow-lg my-4 hover:shadow-2xl transition duration-300 cursor-pointer"
     >
       <div className="flex items-center gap-3">
-        <img
-          src={"./Logo.svg"}
+        <Image
+          src={"./kerjapraktikImg.png"}
           alt="Search"
           width={45}
           height={45}
-          className="flex-shrink-0 object-cover rounded-full btn- w-24 h-24"
+          className="flex-shrink-0 object-cover rounded-full btn- w-45 h-45"
         />
         <div>
-          <span className="text-teal-800 text-lg font-semibold">{company}</span>
+          <span className="text-teal-800 text-lg font-semibold">company</span>
           <h1 className="font-bold text-2xl mt-2">{title}</h1>
           <div className="flex items-center gap-3 mt-2">
             <span className="bg-white-100 text-green-700 rounded-full px-3 py-1 text-sm">{date}</span>
@@ -45,7 +44,7 @@ const KPCard: React.FC<KPCardProps> = ({ key, title, company, date, location }) 
                 />
                 <path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
               </svg>{" "}
-              {location}
+              location
             </span>
           </div>
         </div>
