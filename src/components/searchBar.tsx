@@ -3,9 +3,8 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, useRef, KeyboardEvent } from "react";
 
-const SearchBar = () => {
+const SearchBar = ({onSearch}: any) => {
   const searchRef = useRef<HTMLInputElement>(null);
-  const router = useRouter();
 
   const handleChange = () => {
 
@@ -13,7 +12,7 @@ const SearchBar = () => {
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) =>{
     if(e.key == 'Enter'){
-      router.push(`/seminar/search/${searchRef.current?.value}`)
+      onSearch(searchRef.current?.value)
     } 
   }
 
@@ -32,10 +31,9 @@ const SearchBar = () => {
           <input
             type="text"
             ref={searchRef}
-            onChange={handleChange}
-            onKeyDown={handleKeyDown}
             className="flex items-center w-full h-10 text-sm bg-gray-100 focus:outline-none"
             placeholder="Search"
+            onKeyDown={handleKeyDown}
           />
         </div>
       </div>

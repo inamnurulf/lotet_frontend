@@ -23,7 +23,7 @@ const SeminarList = ({keyword}: any) =>{
   useEffect(
     () =>{
       let endpoint = `${process.env.NEXT_PUBLIC_BACKEND_URL}seminar`;
-      if (keyword !== null) {
+      if (keyword != '' && keyword != null) {
         endpoint = `${process.env.NEXT_PUBLIC_BACKEND_URL}seminar/search/byKeyword/${keyword}`;
       }
       axios.get<Seminar[]>(endpoint)
@@ -33,7 +33,7 @@ const SeminarList = ({keyword}: any) =>{
       .catch(error => {
         console.error('Error fetching data:', error);
       });
-    }, []
+    }, [keyword]
   )
   return(
     <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4' >
