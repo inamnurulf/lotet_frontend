@@ -3,12 +3,15 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { HiOutlineMenuAlt3 } from "react-icons/hi";
 import { AiOutlineClose } from "react-icons/ai";
+import { useAuth } from "@/context/auth-context";
 import Link from "next/link";
 
 const Navbar = ({ defaultform = true }) => {
   const [scrollY, setScrollY] = useState(0);
   const [isFaded, setIsFaded] = useState(false);
   const [isOpen, setIsOpen] = useState(true);
+
+  const { logout, token, name } = useAuth();
 
   const fadeEffect = {
     opacity: isFaded ? 1 : 0,
@@ -18,6 +21,10 @@ const Navbar = ({ defaultform = true }) => {
   const handleNavbar = () => {
     setIsOpen(!isOpen);
   };
+
+  const handleLogout=()=>{
+    logout()
+  }
 
   const handleScroll = () => {
     setScrollY(window.scrollY);
@@ -77,14 +84,23 @@ const Navbar = ({ defaultform = true }) => {
               Seminar
             </Link>
           </div>
-          <Link
-            href="/auth/login"
+          {token ? <Link
+            href="/profile"
             className="w-[150px] text-primary text-center justify-center hidden md:flex "
           >
             <div className="hover:bg-primary hover:text-white px-3 duration-200 rounded-xl font-semibold lg:text-xl">
-              Login
+              Profile
             </div>
           </Link>
+            :
+            <Link
+              href="/auth/login"
+              className="w-[150px] text-primary text-center justify-center hidden md:flex "
+            >
+              <div className="hover:bg-primary hover:text-white px-3 duration-200 rounded-xl font-semibold lg:text-xl">
+                Login
+              </div>
+            </Link>}
           <div className="text-3xl md:hidden px-3 ">
             {isOpen ? (
               <HiOutlineMenuAlt3 onClick={handleNavbar} />
@@ -114,12 +130,20 @@ const Navbar = ({ defaultform = true }) => {
               >
                 Seminar
               </a>
-              <a
-                href="/auth/login"
-                className="mx-3 hover:bg-primary hover:text-white w-full p-3 "
-              >
-                Login
-              </a>
+              {token ?
+                <a
+                  className="mx-3 hover:bg-primary hover:text-white w-full p-3 "
+                  href="/profile"
+                >
+                  Logout
+                </a>
+                :
+                <a
+                  href="/auth/login"
+                  className="mx-3 hover:bg-primary hover:text-white w-full p-3 "
+                >
+                  Login
+                </a>}
             </div>
           </div>
         ) : null}

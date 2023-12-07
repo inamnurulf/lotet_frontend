@@ -51,7 +51,7 @@ const Verification: FC<Props> = (props): JSX.Element => {
         }
       );
       if (response.ok) {
-        router.push('/home')
+        router.push('/login')
       }
       else {
         const data = response.json();
@@ -60,7 +60,6 @@ const Verification: FC<Props> = (props): JSX.Element => {
     } catch (error) {
       console.log(error)
     }
-
   }
 
   const handleResend = async () => {
