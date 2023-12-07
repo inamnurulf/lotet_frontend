@@ -18,7 +18,7 @@ const SeminarDescription: React.FC<SeminarDescriptionProps> = ({title, body, cat
     });
   }, []);
   return(
-    <div className="flex-col justify-center bg-white h-min max-w-lg p-4 rounded-xl overflow-hidden" data-aos='fade-down'>
+    <div className="flex-col justify-center bg-white h-min max-w-lg p-4 rounded-xl overflow-hidden" data-aos='zoom-in-up'>
       <div className="rounded-lg h-50 overflow-hidden justify-center items-center mb-4">
         <Image 
         className="w-full"

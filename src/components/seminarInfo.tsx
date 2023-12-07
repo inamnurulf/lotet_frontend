@@ -21,7 +21,7 @@ const SeminarInfo: React.FC<SeminarInfoProps> = ({users, dateTime, location, add
     });
   }, []);
   return(
-    <div className="bg-white rounded-xl max-w-lg overflow-clip">
+    <div className="bg-white rounded-xl max-w-lg overflow-clip" data-aos='zoom-in-up'>
       <div className="flex flex-col p-8 w-full gap-8">
       <h3 className="font-bold text-lg md:text-xl">Seminar Details</h3>
       <Information type="Date" content={date}></Information>
