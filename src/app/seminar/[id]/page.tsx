@@ -4,7 +4,7 @@ import Navbar from '@/components/navbar';
 import SeminarInfo from '@/components/seminarInfo';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { usePathname} from 'next/navigation';
 import Seminar from '../page';
 
 interface Seminar {
@@ -20,6 +20,7 @@ interface Seminar {
   createdAt: string;
   updatedAt: string;
   __v: number;
+  username: string;
 }
 
 const SeminarDetails = () => {
@@ -35,6 +36,7 @@ const SeminarDetails = () => {
     updatedAt: '',
     location: '',
     additional: '',
+    username: '',
     __v: 0
   }
   const router = usePathname()
@@ -60,7 +62,7 @@ const SeminarDetails = () => {
       <div className='justify-center grid grid-cols-1 md:grid-cols-2 gap-8 mt-32 mx-8'>
         {/* Pass the ID to the components that require it */}
         <SeminarDescription title={seminar?.title} body={seminar?.details} category={seminar?.category} image={seminar?.image}/>
-        <SeminarInfo users={'Openheimer'} dateTime={seminar?.eventTime} location={seminar.location} additional={seminar.additional}/>
+        <SeminarInfo users={seminar?.username} dateTime={seminar?.eventTime} location={seminar.location} additional={seminar.additional}/>
       </div>
     </div>
   );

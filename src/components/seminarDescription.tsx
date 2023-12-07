@@ -18,7 +18,7 @@ const SeminarDescription: React.FC<SeminarDescriptionProps> = ({title, body, cat
       width={300}
       height={200}
       />
-      <div className="flex gap-4 mb-2 items-center">
+      <div className="flex gap-4 mb-4 items-center">
       { category && category.length > 0 ? (
         category.map(cat => (
           <CategoryButton key={cat} name={cat} />
@@ -27,7 +27,7 @@ const SeminarDescription: React.FC<SeminarDescriptionProps> = ({title, body, cat
         <p>No categories available</p>
       )}
       </div>
-      <h3 className="text-gray-900 font-semibold mb-1">{title}</h3>
+      <h3 className="text-gray-900 font-semibold mb-2">{title}</h3>
       <p className="text-gray-900 font-normal">{body}</p>
     </div>
   )

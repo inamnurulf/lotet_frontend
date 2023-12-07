@@ -32,16 +32,21 @@ const SeminarCard: React.FC<SeminarCardProps> = ({ id, title, date, location }) 
             height={200}
             />
         </div>
-        <h2 className="font-bold text-xl mb-2 px-4">{title}</h2>
+        <h2 className="font-bold md:text-xl text-md mb-2 px-4 truncate overflow-hidden">{title}</h2>
         <div className="flex mb-4 items-start space-x-4 px-4">
           <div className="flex flex-row gap-2 items-center">
-            <FaCalendarDays size={24}></FaCalendarDays>           
-            <h4 className="text-gray-600 ">{dateOnly}</h4>
+            <FaCalendarDays size={24} className="text-secondary"></FaCalendarDays>           
+            <h4 className="text-gray-600 text-sm md:text-md font-medium">{dateOnly}</h4>
           </div>
-          <div className="flex flex-row gap-2 items-center">
-            <FaLocationPin size={24}></FaLocationPin>
-            <h4 className="text-gray-600">{location}</h4>
-          </div>
+          {
+            location && (   
+              <div className="flex flex-row gap-2 items-center">
+                <FaLocationPin size={24} className="text-secondary"></FaLocationPin>
+                <h4 className="text-gray-600 text-sm md:text-md font-medium">{location}</h4>
+              </div>
+            )
+          }
+          
           
         </div>
         

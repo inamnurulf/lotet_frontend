@@ -1,5 +1,5 @@
 import IconComponent from "../IconReact"
-import {FaCalendar, FaClock, FaPerson, FaLocationPin, FaInfo} from 'react-icons/fa6'
+import {FaCalendar, FaClock, FaPerson, FaLocationPin, FaCircleInfo} from 'react-icons/fa6'
 import { IconType } from 'react-icons';
 interface InformationProps{
   content: string | string[] | undefined
@@ -16,7 +16,7 @@ const getIcon = (type: string): IconType | null => {
     case 'Location':
       return FaLocationPin;
     case 'Additional':
-      return FaInfo;
+      return FaCircleInfo;
     default:
       return null;
   }
@@ -32,8 +32,8 @@ const Information: React.FC<InformationProps> = ({type, content}) =>{
         <IconComponent size={40} className="text-secondary"></IconComponent>
       </div>
       <div className="flex flex-col">
-        <h3 className="font-bold text-lg">{type}</h3>
-        <h4 className="font-medium text-base">{content}</h4>
+        <h3 className="font-bold text-md md:text-lg">{type}</h3>
+        <h4 className="font-medium text-sm md:text-md">{content}</h4>
       </div>
     </div>
   )
