@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import SeminarCard from "./atom/seminarCard"
 import axios from 'axios'
+import { useRouter } from 'next/router';
 
 interface Seminar{
   _id: string;
@@ -20,6 +21,7 @@ const SeminarList = () =>{
   const [response, setResponse] = useState<Seminar[]>([]);
   useEffect(
     () =>{
+      console.log('aaaaa')
       axios.get<Seminar[]>(`${process.env.NEXT_PUBLIC_BACKEND_URL}seminar`)
       .then(res => {
         setResponse(res.data); // Assuming the response is an array

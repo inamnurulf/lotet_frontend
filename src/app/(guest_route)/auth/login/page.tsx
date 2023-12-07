@@ -25,7 +25,7 @@ const SignIn = () => {
     e.preventDefault();
     try {
       const response = await fetch(
-        process.env.NEXT_PUBLIC_BACKEND_URL + "/user/signIn",
+        process.env.NEXT_PUBLIC_BACKEND_URL + "user/signIn",
         {
           method: "POST",
           headers: {
@@ -42,7 +42,7 @@ const SignIn = () => {
         setPasswordCheck(true);
         const data = await response.json();
         login(data);
-        router.push("/dashboard");
+        router.push("/profile");
       } else {
         setPasswordCheck(false);
         const errorData = await response.json();

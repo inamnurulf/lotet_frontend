@@ -1,8 +1,6 @@
 "use client";
 import React, { useEffect } from "react";
-import axios from "axios";
 import { useRouter } from "next/navigation";
-import { render } from "react-dom";
 import PasswordMatch from "@/components/passwordMatch";
 
 const SignUp = () => {
@@ -12,6 +10,8 @@ const SignUp = () => {
     email: "",
     password: "",
     confirmPassword: "",
+    nim: "",
+    username: ""
   });
 
   const [buttonDisabled, setButtonDisabled] = React.useState(false);
@@ -19,44 +19,64 @@ const SignUp = () => {
   const [samePassword, setSamePassword] = React.useState(true);
 
   const onSignUp = async () => {
+    console.log("hit")
     try {
       setLoading(true);
-      // const response = await axios.post(
-      //   "http://localhost:3030/user/signUp",
-      //   user
-      // );
-      // console.log("Sign Up Success", response.data);
-      router.push("/auth/login");
+      const response = await fetch(
+        process.env.NEXT_PUBLIC_BACKEND_URL + "user/signUp",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: user.email,
+            name: user.username,
+            nim: user.nim,
+            password: user.password
+          }),
+        }
+        );
+
+        const data = await response.json();
+        console.log(await data)
+
+        if (response.ok) {
+          router.push('/login')
+        } else {
+          console.log("err:" + response)
+        }
     } catch (error) {
-      console.log("Sign Up Error", error);
+      console.log(error);
     } finally {
       setLoading(false);
     }
   };
 
-  const handleChangeEmail = (e:any) => {
+  const handleChangeEmail = (e: any) => {
     setUser({ ...user, email: e.target.value })
   };
 
-  const handleChangePassword = (e:any) => {
+  const handleChangePassword = (e: any) => {
     setUser({ ...user, password: e.target.value })
   };
 
-  const handleChangeConfirmPassword = (e:any) => {
-    setUser({ ...user, confirmPassword: e.target.value });
+  const handleChangeUsername = (e: any) => {
+    setUser({ ...user, username: e.target.value })
+  };
 
-    // if (user.password === user.confirmPassword) {
-    //   setSamePassword(true);
-    // }
-    // else {
-    //   setSamePassword(false);
-    // }
+  const handleChangeNim = (e: any) => {
+    setUser({ ...user, nim: e.target.value })
+  };
+
+  const handleChangeConfirmPassword = (e: any) => {
+    setUser({ ...user, confirmPassword: e.target.value });
   };
 
   const passwordCheck = () => {
     if (user.password === user.confirmPassword) {
       setSamePassword(true);
-      onSignUp;
+      onSignUp();
     }
     else {
       setSamePassword(false);
@@ -83,8 +103,8 @@ const SignUp = () => {
             {loading ? "Loading..." : "Sign Up"}
           </h2>
           <div className="mb-4">
-              {samePassword ? <p></p> : <PasswordMatch message='Both passwords are not identical!' />}
-            </div>
+            {samePassword ? <p></p> : <PasswordMatch message='Both passwords are not identical!' />}
+          </div>
           <div className="mb-4">
             <label className="block text-gray-700 font-semibold mb-2">
               {/* for="email" */}
@@ -96,6 +116,30 @@ const SignUp = () => {
               type="email"
               value={user.email}
               onChange={handleChangeEmail}
+            ></input>
+          </div>
+          <div className="mb-4">
+            <label className="block text-gray-700 font-semibold mb-2">
+              {/* for="email" */}
+              Nama Lengkap :
+            </label>
+            <input
+              className="appearance-none bg-zinc-300 border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="username"
+              value={user.username}
+              onChange={handleChangeUsername}
+            ></input>
+          </div>
+          <div className="mb-4">
+            <label className="block text-gray-700 font-semibold mb-2">
+              {/* for="email" */}
+              NIM
+            </label>
+            <input
+              className="appearance-none bg-zinc-300 border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="nim"
+              value={user.nim}
+              onChange={handleChangeNim}
             ></input>
           </div>
           <div className="mb-4">
@@ -126,9 +170,9 @@ const SignUp = () => {
           </div>
           <div className="flex flex-col items-center justify-between">
             <button
-              disabled = {buttonDisabled}
-              className= {buttonDisabled ? 
-                "bg-gray-200 font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline" : 
+              disabled={buttonDisabled}
+              className={buttonDisabled ?
+                "bg-gray-200 font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline" :
                 "bg-secondary transform transition-transform hover:scale-105 font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline"}
               type="button"
               onClick={passwordCheck}
