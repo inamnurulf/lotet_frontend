@@ -106,18 +106,6 @@ const ModalUser = ({ title, action, isOpen, onClose, onConfirm, isKP }: any) => 
             onChange={handleNameChange}
           ></input>
         </div>
-        {isKP ?
-          <div className="mb-2">
-            <label className="block text-gray-700 font-semibold mb-2">
-              Title
-            </label>
-            <input
-              className="appearance-none bg-zinc-300 border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="title"
-              type="text"
-              onChange={handleTitleChange}
-            ></input>
-          </div> : null}
         <div className="mb-2">
           <label className="block text-gray-700 font-semibold mb-2">
             Description
@@ -128,40 +116,46 @@ const ModalUser = ({ title, action, isOpen, onClose, onConfirm, isKP }: any) => 
             onChange={handleDescriptionChange}
           ></textarea>
         </div>
-        <div className="mb-2">
-          <label className="block text-gray-700 font-semibold mb-2">
-            Location
-          </label>
-          <textarea
-            className="appearance-none bg-zinc-300 border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="location"
-            onChange={handleLocationChange}
-          ></textarea>
-        </div>
-        <div className="mb-2">
-          <label className="block text-gray-700 font-semibold mb-2">
-            Nota Bene (NB)
-          </label>
-          <textarea
-            className="appearance-none bg-zinc-300 border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="additional"
-            onChange={handleAdditionalChange}
-          ></textarea>
-        </div>
-        <div className="flow-root mb-2">
-          <div className="w-fit float-left" >
-            <label className="block text-gray-700 font-semibold mb-2">
-              Date
-            </label>
-            <DateCalendar onDateChange={handleDateChange} />
+        {isKP ? null :
+          <>
+            <div className="mb-2">
+              <label className="block text-gray-700 font-semibold mb-2">
+                Location
+              </label>
+              <textarea
+                className="appearance-none bg-zinc-300 border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                id="location"
+                onChange={handleLocationChange}
+              ></textarea>
+            </div>
+            <div className="mb-2">
+              <label className="block text-gray-700 font-semibold mb-2">
+                Nota Bene (NB)
+              </label>
+              <textarea
+                className="appearance-none bg-zinc-300 border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                id="additional"
+                onChange={handleAdditionalChange}
+              ></textarea>
+            </div>
+            <div className="flow-root mb-2">
+              <div className="w-fit float-left" >
+                <label className="block text-gray-700 font-semibold mb-2">
+                  Date
+                </label>
+                <DateCalendar onDateChange={handleDateChange} />
+              </div>
+              </div>
+            </>
+        }
+        <div>
+            <div className="w-1/2 float-right">
+              <label className="block text-gray-700 font-semibold mb-2">
+                Category
+              </label>
+              <Dropdown onSelectValue={handleDropdownChange} />
+            </div>
           </div>
-          <div className="w-1/2 float-right">
-            <label className="block text-gray-700 font-semibold mb-2">
-              Category
-            </label>
-            <Dropdown onSelectValue={handleDropdownChange} />
-          </div>
-        </div>
         <div className="w-full flex flex-row-reverse gap-3">
           <button
             className="bg-secondary transform transition-transform hover:scale-105 font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
@@ -179,8 +173,8 @@ const ModalUser = ({ title, action, isOpen, onClose, onConfirm, isKP }: any) => 
             Cancel
           </button>
         </div>
-      </form>
-    </div>
+      </form >
+    </div >
   );
 };
 

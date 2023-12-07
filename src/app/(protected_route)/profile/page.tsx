@@ -143,16 +143,6 @@ const Profile = ({ Name_arg, Nim_arg }: any) => {
 
   const confirmAddSeminar = async (card: any) => {
     try {
-      console.log({
-        user_id: _id,
-        title: card.name,
-        details: card.details,
-        image: card.image,
-        eventTime: card.eventTime,
-        category: card.category,
-        location: card.location,
-        additional: card.additional,
-      })
       const response = await fetch(
         process.env.NEXT_PUBLIC_BACKEND_URL + "seminar",
         {
@@ -203,8 +193,40 @@ const Profile = ({ Name_arg, Nim_arg }: any) => {
     setIsAddKPModalOpen(true);
   }
 
-  const confirmAddKP = () => {
-    //post to api
+  const confirmAddKP =async (card:any) => {
+    try {
+      console.log({
+        user_id: _id,
+        title: card.name,
+        details: card.details,
+        image: card.image,
+        category: card.category,
+      })
+      const response = await fetch(
+        process.env.NEXT_PUBLIC_BACKEND_URL + "kerjaPraktik",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            user_id: _id,
+            title: card.name,
+            details: card.details,
+            image: card.image,
+            category: card.category,
+          }),
+        }
+      );
+
+      const data = await response.json();
+      console.log(data)
+
+    } catch (error) {
+      console.log(error);
+    } finally {
+    }
+
     setIsAddKPModalOpen(false);
   }
 
