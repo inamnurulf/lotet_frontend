@@ -18,11 +18,15 @@ interface Seminar{
   __v: number;
 }
 
-const SeminarList = () =>{
+const SeminarList = ({keyword}: any) =>{
   const [response, setResponse] = useState<Seminar[]>([]);
   useEffect(
     () =>{
-      axios.get<Seminar[]>(`${process.env.NEXT_PUBLIC_BACKEND_URL}seminar`)
+      let endpoint = `${process.env.NEXT_PUBLIC_BACKEND_URL}seminar`;
+      if (keyword !== null) {
+        endpoint = `${process.env.NEXT_PUBLIC_BACKEND_URL}seminar/search/byKeyword/${keyword}`;
+      }
+      axios.get<Seminar[]>(endpoint)
       .then(res => {
         setResponse(res.data); // Assuming the response is an array
       })
@@ -31,12 +35,6 @@ const SeminarList = () =>{
       });
     }, []
   )
-
-  const [searchSeminar, setSearchSeminar] = useState('')
-  
-  const filteredSeminar = response.filter((seminar: Seminar) =>
-    seminar.title.toLowerCase().includes(searchSeminar.toLowerCase())
-  );
   return(
     <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4' >
           {

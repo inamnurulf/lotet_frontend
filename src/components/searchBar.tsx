@@ -1,9 +1,11 @@
 'use client'
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { ChangeEvent, useRef, KeyboardEvent } from "react";
 
 const SearchBar = () => {
   const searchRef = useRef<HTMLInputElement>(null);
+  const router = useRouter();
 
   const handleChange = () => {
 
@@ -11,7 +13,7 @@ const SearchBar = () => {
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) =>{
     if(e.key == 'Enter'){
-      alert(searchRef.current?.value)
+      router.push(`/seminar/search/${searchRef.current?.value}`)
     } 
   }
 

@@ -4,7 +4,7 @@ import Navbar from '@/components/navbar';
 import SeminarInfo from '@/components/seminarInfo';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import Seminar from '../page';
+import Seminar from '../../page';
 
 interface Seminar {
   _id: string;
