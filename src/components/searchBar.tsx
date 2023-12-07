@@ -1,6 +1,5 @@
 'use client'
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import { ChangeEvent, useRef, KeyboardEvent } from "react";
 
 const SearchBar = ({onSearch}: any) => {

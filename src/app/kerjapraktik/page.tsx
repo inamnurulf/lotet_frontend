@@ -41,7 +41,7 @@ const KerjaPraktik = () => {
     <div className='flex items-center flex-col overflow-hidden bg-primary min-h-screen'>
       <Navbar defaultform = {false}></Navbar>
       
-      <div className='mt-8 w-1/3 min-w-fit md:min-w-0 flex justify-center'>
+      <div className='mt-10 md:w-1/3 w-3/4 mx-4 flex justify-center mb-4'>
         <SearchBar></SearchBar>
       </div>
 
