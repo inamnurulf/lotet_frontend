@@ -5,6 +5,7 @@ import { HiOutlineMenuAlt3 } from "react-icons/hi";
 import { AiOutlineClose } from "react-icons/ai";
 import { useAuth } from "@/context/auth-context";
 import Link from "next/link";
+import Logo from "../../public/Logo.svg"
 
 const Navbar = ({ defaultform = true }) => {
   const [scrollY, setScrollY] = useState(0);
@@ -57,7 +58,7 @@ const Navbar = ({ defaultform = true }) => {
         <div className={`relative bg-white w-screen ${defaultform ? " w-full " : " md:w-[90vw] md:rounded-full "}  mx-auto p-2 h-[70px]  top-0 flex justify-between items-center`}>
           <div>
             <Image
-              src={"./Logo.svg"}
+              src={Logo}
               width={155}
               alt="Logo"
               height={64}
