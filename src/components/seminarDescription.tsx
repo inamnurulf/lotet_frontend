@@ -11,7 +11,7 @@ interface SeminarDescriptionProps{
 const SeminarDescription: React.FC<SeminarDescriptionProps> = ({title, body, category, image}) => {
   
   return(
-    <div className="flex-col justify-center bg-white h-min p-4 rounded-xl overflow-hidden">
+    <div className="flex-col justify-center bg-white h-min max-w-lg p-4 rounded-xl overflow-hidden">
       <Image className="rounded-lg"
       src= {"./Logo.svg"}
       alt="Seminar Logo"
