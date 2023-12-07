@@ -2,7 +2,6 @@
 import React, { useEffect } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import { render } from "react-dom";
 import PasswordMatch from "@/components/passwordMatch";
 
 const SignUp = () => {
