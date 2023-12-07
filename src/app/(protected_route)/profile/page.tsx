@@ -398,6 +398,7 @@ const Profile = ({ Name_arg, Nim_arg }: any) => {
                         setIsDeleteModalOpen(true);
                         setIsKP(false)
                       }}
+                      typescard = "seminar"
                       handleEditButton={() => {
                         setItemToDelete(item._id);
                         setIsKP(false);
@@ -429,6 +430,7 @@ const Profile = ({ Name_arg, Nim_arg }: any) => {
                         setIsDeleteModalOpen(true);
                         setIsKP(true)
                       }}
+                      typescard="kerjaPraktik"
                       handleEditButton={() => {
                         setItemToDelete(item._id);
                         setIsKP(true);

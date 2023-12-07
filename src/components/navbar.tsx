@@ -40,7 +40,6 @@ const Navbar = ({ defaultform = true }) => {
   }, []);
 
   useEffect(() => {
-    console.log(scrollY)
     if (defaultform === true) {
       setIsFaded(true);
     } else {
