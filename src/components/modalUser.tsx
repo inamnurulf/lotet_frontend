@@ -1,6 +1,10 @@
 import React from "react";
 import Dropdown from "./atom/dropDown";
 import DateCalendar from "./atom/datePicker";
+import ImageUploadForm from "./imageUpload";
+import { useEffect, useState } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 // interface ModalUserSeminarProps {
 //   title: string,
@@ -10,13 +14,32 @@ import DateCalendar from "./atom/datePicker";
 const ModalUser = ({ title, action, isOpen, onClose, onConfirm, isKP }: any) => {
   if (!isOpen) return null;
 
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
+  
+
+  useEffect(() => {
+    AOS.init({
+      duration: 800,
+    });
+  },[]);
+
+  const handleImageChange = (url: string | null) => {
+    setPreviewUrl(url);
+  };
+
+  const handleDateChange = (date: Date | null) => {
+    setSelectedDate(date);
+  };
+
   return (
     <div className="fixed inset-0 bg-black bg-opacity-30 backdrop-blur-sm flex justify-center items-center">
-        <form className="bg-white border border-primary w-1/2 rounded-lg shadow-lg p-8">
-          <h2 className="text-center text-2xl font-bold mb-4">
+        <form className="z-02 bg-white border border-primary w-1/2 rounded-lg shadow-lg p-8" data-aos="fade-up">
+          <h2 className="text-center text-xl font-bold mb-2">
             {title}
           </h2>
-          <div className="mb-4">
+          <ImageUploadForm onImageChange={handleImageChange} />
+          <div className="mb-2">
             <label className="block text-gray-700 font-semibold mb-2">
               Name
             </label>
@@ -28,7 +51,7 @@ const ModalUser = ({ title, action, isOpen, onClose, onConfirm, isKP }: any) => 
             ></input>
           </div>
           {isKP ?                 
-            <div className="mb-4">
+            <div className="mb-2">
               <label className="block text-gray-700 font-semibold mb-2">
                 Title
               </label>
@@ -38,8 +61,8 @@ const ModalUser = ({ title, action, isOpen, onClose, onConfirm, isKP }: any) => 
                 type="text"
               //   onChange={}
               ></input>
-            </div> : <p></p>}
-          <div className="mb-4">
+            </div> : null}
+          <div className="mb-2">
             <label className="block text-gray-700 font-semibold mb-2">
               Description
             </label>
@@ -49,12 +72,12 @@ const ModalUser = ({ title, action, isOpen, onClose, onConfirm, isKP }: any) => 
             //   onChange={}
             ></textarea>
           </div>
-          <div className="flow-root mb-6">
+          <div className="flow-root mb-2">
             <div className="w-fit float-left" >
               <label className="block text-gray-700 font-semibold mb-2">
                 Date
               </label>
-              <DateCalendar/>
+              <DateCalendar onDateChange={handleDateChange} />
             </div>
             <div className="w-1/2 float-right">
               <label className="block text-gray-700 font-semibold mb-2">
