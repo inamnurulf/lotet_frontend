@@ -6,9 +6,10 @@ interface KPCardProps {
   id: string;
   title: string;
   date: string;
+  image: string;
 }
 
-const KPCard: React.FC<KPCardProps> = ({ id, title, date }) => {
+const KPCard: React.FC<KPCardProps> = ({ id, title, date, image }) => {
   return (
     <div
       id={id}
@@ -17,7 +18,7 @@ const KPCard: React.FC<KPCardProps> = ({ id, title, date }) => {
     >
       <div className="flex items-center gap-3">
         <Image
-          src={"./kerjapraktikImg.png"}
+          src = {image}
           alt="Search"
           width={45}
           height={45}
@@ -49,7 +50,8 @@ const KPCard: React.FC<KPCardProps> = ({ id, title, date }) => {
           </div>
         </div>
       </div>
-      <Link href="/kerjapraktik/1">
+
+      <Link href={`./kerjapraktik/${id}`}>
         <button className="bg-blue-900 hover:scale-105 text-white font-medium px-4 py-2 rounded-md flex gap-1 items-center">
           Check Out!
           <svg

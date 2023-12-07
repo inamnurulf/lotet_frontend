@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/auth-context";
 import PasswordMatch from "@/components/passwordMatch";
+import { toast } from "react-toastify";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
@@ -52,6 +53,12 @@ const SignUp = () => {
 
         if( data?.needVerify==true) {
           login(data)
+          toast("Check ur Email please!! ✨", {
+            hideProgressBar: false,
+            autoClose: 2000,
+            type: "success",
+            theme: "colored",
+          });
           router.push('/auth/verification') 
         }
         else {
