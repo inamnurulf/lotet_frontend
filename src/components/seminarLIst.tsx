@@ -35,6 +35,11 @@ const SeminarList = ({keyword}: any) =>{
       });
     }, [keyword]
   )
+  if(!response || response.length === 0){
+    return(
+      <div className='justify-center'>Not Found</div>
+    )
+  }
   return(
     <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4' >
           {

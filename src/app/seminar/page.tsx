@@ -17,12 +17,14 @@ const Seminar = () => {
           <SearchBar onSearch = {handleSearch}></SearchBar>
           
         </div>
-      <div className='mx-4 flex justify-center'>
         {
           keyword &&(
-            <div>{`Search for ${keyword}`}</div>
+            <div className='w-full justify-center items-start mx-4 mb-4'>
+              <div className='mx-4 text-xl font-bold text-white'>{`Search for ${keyword}`}</div>
+            </div>  
           )
         }
+      <div className='mx-4 flex justify-center'>
         <SeminarList keyword = {keyword}></SeminarList>
       </div>
       </div>
