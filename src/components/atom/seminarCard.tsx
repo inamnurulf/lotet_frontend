@@ -22,14 +22,15 @@ const SeminarCard: React.FC<SeminarCardProps> = ({ id, title, date, location }) 
   }, []);
   return (
     <div data-aos="fade-up" className="">
-    <div id={id} className="max-w-md min-w-full md:min-w-0 bg-white rounded-xl overflow-hidden  cursor-pointer shadow-lg hover:shadow-xl hover:scale-105 transition duration-300">
+    <div id={id} className="h-full max-w-md min-w-full md:min-w-0 bg-white rounded-xl overflow-hidden  cursor-pointer shadow-lg hover:shadow-xl hover:scale-105 transition duration-300">
       <Link href={`./seminar/${id}`}>
-        <div>
+        <div className="m-1 rounded-lg h-40 overflow-hidden justify-center items-center">
           <Image
-            src = {"./Logo.svg"}
+            src= {'/seminarImg.png'}
             alt = "Search"
             width={386}
             height={200}
+            className="w-full"
             />
         </div>
         <h2 className="font-bold md:text-xl text-md mb-2 px-4 truncate overflow-hidden">{title}</h2>

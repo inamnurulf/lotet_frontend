@@ -4,7 +4,7 @@ import SeminarList from '@/components/seminarLIst'
 
 const Seminar = () => {  
   return (
-    <section className='flex items-center flex-col overflow-auto bg-primary min-h-screen'>
+    <section className='flex items-center flex-col overflow-hidden bg-primary min-h-screen'>
       <Navbar defaultform = {false}></Navbar>
       <div className='flex flex-col w-screen items-center'>
         <div className='mt-10 md:w-1/3 w-3/4 mx-4 flex justify-center mb-4'>
