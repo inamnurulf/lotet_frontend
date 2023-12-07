@@ -166,7 +166,7 @@ const ModalUser = ({ title, action, isOpen, onClose, onConfirm, isKP }: any) => 
             {action}
           </button>
           <button
-            className="bg-red-200 transform transition-transform hover:scale-105 font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            className="bg-red-300 transform transition-transform hover:scale-105 font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             type="button"
             onClick={onClose}
           >
