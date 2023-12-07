@@ -1,46 +1,58 @@
 'use client'
 import React, { useEffect, useState } from 'react'
-import KPCard from './kpCard';
+import KerjaPraktikCard from "./atom/kerjaPraktikCard" 
 import axios from 'axios'
 
-interface KerjaPraktik{
+interface KerjaPraktik {
   _id: string;
   user_id: string;
   title: string;
-  details: string;
   image: string;
-  date: string;
   category: string[];
   createdAt: string;
   updatedAt: string;
   __v: number;
 }
 
-const KPList = ({keyword}: any) =>{
+const KerjaPraktikList = ({ keyword }: any) => {
   const [response, setResponse] = useState<KerjaPraktik[]>([]);
-  useEffect(
-    () =>{
-      let endpoint = `${process.env.NEXT_PUBLIC_BACKEND_URL}kerjapraktik`;
-      if (keyword != '' && keyword != null) {
-        endpoint = `${process.env.NEXT_PUBLIC_BACKEND_URL}seminar/search/byKeyword/${keyword}`;
+  const [isLoading, setIsLoading] = useState(true);
+  useEffect(() => {
+    setIsLoading(true);
+    setResponse([]); // Clear previous response
+
+    const fetchData = async () => {
+      let endpoint = `${process.env.NEXT_PUBLIC_BACKEND_URL}kerjaPraktik`;
+      if (keyword && keyword.trim() !== '') {
+        endpoint = `${process.env.NEXT_PUBLIC_BACKEND_URL}kerjaPraktik/search/byKeyword/${keyword}`;
       }
-      axios.get<KerjaPraktik[]>(endpoint)
-      .then(res => {
-        setResponse(res.data); // Assuming the response is an array
-      })
-      .catch(error => {
+
+      try {
+        const res = await axios.get<KerjaPraktik[]>(endpoint);
+        setResponse(res.data);
+      } catch (error) {
         console.error('Error fetching data:', error);
-      });
-    }, [keyword]
-  )
-  return(
-    <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4' >
-          {
-            response.map(item => (
-              <KPCard id = {item._id} title={item.title} date={item.date}/>
-            ))
-          }
+      } finally {
+        setIsLoading(false)
+      }
+    };
+
+    // Simulating a delay of 2 seconds using setTimeout
+    setTimeout(fetchData, 2000);
+  }, [keyword]);
+
+  return (
+    <div className=''>
+      {isLoading ? <div className='spinner justify-center items-center min-h-full'></div> : null}
+      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
+        {
+          response.map(item => (
+            <KerjaPraktikCard key={item._id} id={item._id} title={item.title} image={item.image} />
+          ))
+        }
+      </div>
     </div>
   )
 }
-export default KPList
+
+export default KerjaPraktikList;

@@ -73,7 +73,7 @@ const Navbar = ({ defaultform = true }) => {
               Home
             </Link>
             <Link
-              href="/kerjapraktik"
+              href="/kerjaPraktik"
               className="lg:text-xl text-primary mx-5 hover:bg-primary hover:text-white lg:px-3 duration-200 rounded  rounded-xl font-semibold"
             >
               Kerja Praktik
@@ -120,7 +120,7 @@ const Navbar = ({ defaultform = true }) => {
                 Home
               </a>
               <a
-                href="/kerjapraktik"
+                href="/kerjaPraktik"
                 className="mx-3 hover:bg-primary hover:text-white w-full p-3 "
               >
                 Kerja Praktik
