@@ -1,9 +1,11 @@
 "use client";
 import React, { useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { useAuth } from "@/context/auth-context";
 import PasswordMatch from "@/components/passwordMatch";
 
 const SignUp = () => {
+  const { login } = useAuth();
   const router = useRouter();
 
   const [user, setUser] = React.useState({
@@ -19,7 +21,6 @@ const SignUp = () => {
   const [samePassword, setSamePassword] = React.useState(true);
 
   const onSignUp = async () => {
-    console.log("hit")
     try {
       setLoading(true);
       const response = await fetch(
@@ -39,12 +40,14 @@ const SignUp = () => {
         );
 
         const data = await response.json();
-        console.log(await data)
+        console.log(data)
 
-        if (response.ok) {
-          router.push('/login')
-        } else {
-          console.log("err:" + response)
+        if( data?.needVerify==true) {
+          login(data)
+          router.push('/auth/verification') 
+        }
+        else {
+          console.log(data)
         }
     } catch (error) {
       console.log(error);
@@ -196,3 +199,4 @@ const SignUp = () => {
 };
 
 export default SignUp;
+

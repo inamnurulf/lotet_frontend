@@ -19,12 +19,18 @@ const Verification: FC<Props> = (props): JSX.Element => {
     if(!value) setActiveOTPIndex(currentOTPIndex - 1)
     else setActiveOTPIndex(currentOTPIndex + 1);
     
+    console.log(newOTP.join(''))
     setOtp(newOTP);
   };
 
   const handleOnKeyDown = ({ key }: React.KeyboardEvent<HTMLInputElement>, index: number) => {
     currentOTPIndex = index;
     if (key === 'Backspace') setActiveOTPIndex(index - 1)
+  }
+
+  const handleSubmit = () => {
+    
+
   }
 
   useEffect(() => {
@@ -48,7 +54,6 @@ const Verification: FC<Props> = (props): JSX.Element => {
                 <React.Fragment key={index}>
                   <input
                     ref = {index === activeOTPIndex ? inputRef : null}
-                    type="number"
                     className="w-12 h-12 mb-1 ml-1 mr-1 text-center border border-gray-300 rounded focus:outline-none focus:border-blue-500"
                     onChange={ handleOnChange }
                     onKeyDown={(e) => handleOnKeyDown(e, index) }
@@ -73,8 +78,7 @@ const Verification: FC<Props> = (props): JSX.Element => {
               </p>
               <button
                 className="bg-secondary  mt-5 transform transition-transform hover:scale-105 font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                type="submit"
-                // onClick={handleSubmit}
+                onClick={handleSubmit}
               >
                 Verify
               </button>

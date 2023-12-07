@@ -44,8 +44,12 @@ const SignIn = () => {
         login(data);
         router.push("/profile");
       } else {
-        setPasswordCheck(false);
         const errorData = await response.json();
+        if(errorData.needVerify == true){
+          login(errorData)
+          router.push("/auth/verification")
+        }
+        setPasswordCheck(false);
         console.error("Login failed:", errorData);
       }
     } catch (error) {
