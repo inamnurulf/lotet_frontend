@@ -8,6 +8,7 @@ import { CiSquarePlus } from "react-icons/ci";
 import ModalUser from "@/components/modalUser";
 import axios from "axios";
 import { useAuth } from "@/context/auth-context";
+import { toast } from "react-toastify";
 
 
 interface Seminar {
@@ -96,15 +97,12 @@ const Profile = ({ Name_arg, Nim_arg }: any) => {
       .then((response) => {
         console.log(response)
         if (response.status == 200) {
-          // setUsers((prevUsers) =>
-          //   prevUsers.filter((user: any) => user.id !== userId)
-          // );
-          // toast("User Profile Vanquished from the Database! ⚰️", {
-          //   hideProgressBar: false,
-          //   autoClose: 2000,
-          //   type: "success",
-          //   theme: "colored",
-          // });
+          toast("Deleted!!! ✨", {
+            hideProgressBar: false,
+            autoClose: 2000,
+            type: "warning",
+            theme: "colored",
+          });
 
           if (isKP) {
             setKerjaPraktik((prevsKP) => prevsKP.filter((KP: any) => KP._id !== id));
@@ -121,22 +119,11 @@ const Profile = ({ Name_arg, Nim_arg }: any) => {
       })
   }
 
-  // const openDeleteModal = (id: any) => {
-  //   setItemToDelete(id);
-  //   setIsDeleteModalOpen(true);
-  // };
 
   const closeDeleteModal = () => {
     setIsDeleteModalOpen(false);
     setItemToDelete(null);
   };
-
-  // const confirmDelete = (isKP: boolean) => {
-  //   if (itemToDelete) {
-  //     handleDeleteSeminarSubmit(itemToDelete, isKP);
-  //     closeDeleteModal();
-  //   }
-  // };
 
 
 
@@ -168,8 +155,13 @@ const Profile = ({ Name_arg, Nim_arg }: any) => {
       );
 
       const data = await response.json();
-      console.log(data)
-
+      toast("Data Added!!! ✨", {
+        hideProgressBar: false,
+        autoClose: 2000,
+        type: "success",
+        theme: "colored",
+      });
+      window.location.reload();
     } catch (error) {
       console.log(error);
     } finally {
@@ -275,8 +267,13 @@ const Profile = ({ Name_arg, Nim_arg }: any) => {
       );
 
       const data = await response.json();
-      console.log(data)
-
+      toast("Data Added!!! ✨", {
+        hideProgressBar: false,
+        autoClose: 2000,
+        type: "success",
+        theme: "colored",
+      });
+      window.location.reload();
     } catch (error) {
       console.log(error);
     } finally {

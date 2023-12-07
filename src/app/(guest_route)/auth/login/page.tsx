@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/auth-context";
 import PasswordMatch from "@/components/passwordMatch";
+import { toast } from "react-toastify";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
@@ -50,6 +51,12 @@ const SignIn = () => {
         setPasswordCheck(true);
         const data = await response.json();
         login(data);
+        toast("Logged In ✨", {
+          hideProgressBar: false,
+          autoClose: 2000,
+          type: "success",
+          theme: "colored",
+        });
         router.push("/profile");
       } else {
         const errorData = await response.json();
