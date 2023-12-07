@@ -6,6 +6,8 @@ import axios from 'axios'
 interface Seminar{
   _id: string;
   user_id: string;
+  location: string;
+  additional: string;
   title: string;
   details: string;
   image: string;
@@ -33,7 +35,7 @@ const SeminarList = () =>{
     <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4' >
           {
             response.map(item => (
-              <SeminarCard key={item._id} id = {item._id} title={item.title} date={item.eventTime} location='Ngak tauu'/>
+              <SeminarCard key={item._id} id = {item._id} title={item.title} date={item.eventTime} location={item.location? item.location: ''}/>
             ))
           }
     </div>

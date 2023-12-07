@@ -32,12 +32,12 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const login = (userData) => {
-    setName(userData.name);
-    setRole(userData.role);
-    setEmail(userData.email);
-    setNim(userData.nim);
-    setVerified(userData.verified);
-    setToken(userData.token);
+    setName(userData?.name);
+    setRole(userData?.role);
+    setEmail(userData?.email);
+    setNim(userData?.nim);
+    setVerified(userData?.verified);
+    setToken(userData?.token);
 
     localStorage.setItem('name', userData.name);
     localStorage.setItem('role', userData.role);

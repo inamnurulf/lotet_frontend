@@ -1,30 +1,91 @@
 "use client"
 import React, { useState, FC, useRef, useEffect } from "react";
+import { useAuth } from "@/context/auth-context";
+import { useRouter } from "next/navigation";
+
 
 // const maxCodeLength = 6;
-interface Props {}
+interface Props { }
 
 var currentOTPIndex: number = 0;
 const Verification: FC<Props> = (props): JSX.Element => {
   const [otp, setOtp] = useState<string[]>(new Array(6).fill(""));
   const [activeOTPIndex, setActiveOTPIndex] = useState<number>(0);
-  
+  const { email } = useAuth();
+  const router = useRouter();
+
+
   const inputRef = useRef<HTMLInputElement>(null)
 
   const handleOnChange = ({ target, }: React.ChangeEvent<HTMLInputElement>): void => {
     const { value } = target;
     const newOTP: string[] = [...otp];
     newOTP[currentOTPIndex] = value.substring(value.length - 1);
-    
-    if(!value) setActiveOTPIndex(currentOTPIndex - 1)
+
+    if (!value) setActiveOTPIndex(currentOTPIndex - 1)
     else setActiveOTPIndex(currentOTPIndex + 1);
-    
+
+    console.log(newOTP.join(''))
     setOtp(newOTP);
   };
 
   const handleOnKeyDown = ({ key }: React.KeyboardEvent<HTMLInputElement>, index: number) => {
     currentOTPIndex = index;
     if (key === 'Backspace') setActiveOTPIndex(index - 1)
+  }
+
+  const handleSubmit = async () => {
+    try {
+      const token = otp.join('')
+      const response = await fetch(
+        process.env.NEXT_PUBLIC_BACKEND_URL + "user/verify",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: email,
+            verifytoken: token
+          }),
+        }
+      );
+      if (response.ok) {
+        router.push('/auth/login')
+      }
+      else {
+        const data = response.json();
+        console.log(data)
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const handleResend = async () => {
+    try {
+      const response = await fetch(
+        process.env.NEXT_PUBLIC_BACKEND_URL + "user/getNewToken",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: email
+          }),
+        }
+      );
+      if (response.ok) {
+        console.log(response.json())
+      }
+      else {
+        const data = response.json();
+        console.log(data)
+      }
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   useEffect(() => {
@@ -43,42 +104,40 @@ const Verification: FC<Props> = (props): JSX.Element => {
               Enter the verification code sent to your email.
             </label>
             <div className="flex flex-row items-center justify-between">
-            {otp.map((_, index) => {
-              return (
-                <React.Fragment key={index}>
-                  <input
-                    ref = {index === activeOTPIndex ? inputRef : null}
-                    type="number"
-                    className="w-12 h-12 mb-1 ml-1 mr-1 text-center border border-gray-300 rounded focus:outline-none focus:border-blue-500"
-                    onChange={ handleOnChange }
-                    onKeyDown={(e) => handleOnKeyDown(e, index) }
-                    value = { otp[index] }
-                  />
-                  {/* {index === otp.length - 1 ? null : (
+              {otp.map((_, index) => {
+                return (
+                  <React.Fragment key={index}>
+                    <input
+                      ref={index === activeOTPIndex ? inputRef : null}
+                      className="w-12 h-12 mb-1 ml-1 mr-1 text-center border border-gray-300 rounded focus:outline-none focus:border-blue-500"
+                      onChange={handleOnChange}
+                      onKeyDown={(e) => handleOnKeyDown(e, index)}
+                      value={otp[index]}
+                    />
+                    {/* {index === otp.length - 1 ? null : (
                     <span className="w-2 py-0.5 bg-gray-400" />
                   )} */}
-                </React.Fragment>
-              );
-            })}
+                  </React.Fragment>
+                );
+              })}
             </div>
             <div className="flex flex-col items-center justify-between">
               <p>
                 Didn't get the code?
-                <a
+                <button
                   className="inline-block ml-1 align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
-                  href="/[resend link here]"
+                  onClick={handleResend}
                 >
                   Resend
-                </a>
+                </button>
               </p>
               <button
                 className="bg-secondary  mt-5 transform transition-transform hover:scale-105 font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                type="submit"
-                // onClick={handleSubmit}
+                onClick={handleSubmit}
               >
                 Verify
               </button>
-            </div>            
+            </div>
           </div>
         </div>
       </div>
@@ -86,9 +145,9 @@ const Verification: FC<Props> = (props): JSX.Element => {
   )
 
 
-  
+
   // const handleSubmit = (e: any) => {
-    
+
   //   e.preventDefault();
   //   onSubmit
 

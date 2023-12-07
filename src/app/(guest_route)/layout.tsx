@@ -9,7 +9,7 @@ const layout = ({ children }: any) => {
   useEffect(() => {
     if (!authLoad) {
         if(token) {
-          // router.push("/dashboard");
+          router.push("/profile");
         }
 
     }
