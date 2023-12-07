@@ -1,5 +1,5 @@
 import IconComponent from "../IconReact"
-import {FaCalendar, FaClockRotateLeft, FaPerson, FaLocationPin, FaInfo} from 'react-icons/fa6'
+import {FaCalendar, FaClock, FaPerson, FaLocationPin, FaInfo} from 'react-icons/fa6'
 import { IconType } from 'react-icons';
 interface InformationProps{
   content: string | string[] | undefined
@@ -10,7 +10,7 @@ const getIcon = (type: string): IconType | null => {
     case 'Date':
       return FaCalendar;
     case 'Time':
-      return FaClockRotateLeft;
+      return FaClock;
     case 'Speakers':
       return FaPerson;
     case 'Location':

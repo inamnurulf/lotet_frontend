@@ -10,6 +10,8 @@ import Seminar from '../page';
 interface Seminar {
   _id: string;
   user_id: string;
+  location: string;
+  additional: string;
   title: string;
   details: string;
   image: string;
@@ -31,6 +33,8 @@ const SeminarDetails = () => {
     category: [''],
     createdAt: '',
     updatedAt: '',
+    location: '',
+    additional: '',
     __v: 0
   }
   const router = usePathname()
@@ -56,7 +60,7 @@ const SeminarDetails = () => {
       <div className='justify-center grid grid-cols-1 md:grid-cols-2 gap-8 mt-32 mx-8'>
         {/* Pass the ID to the components that require it */}
         <SeminarDescription title={seminar?.title} body={seminar?.details} category={seminar?.category} image={seminar?.image}/>
-        <SeminarInfo users={'Openheimer'} dateTime={seminar?.eventTime} location='Cikini' additional='Gratis Naspad untuk kamu'/>
+        <SeminarInfo users={'Openheimer'} dateTime={seminar?.eventTime} location={seminar.location} additional={seminar.additional}/>
       </div>
     </div>
   );
