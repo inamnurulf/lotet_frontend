@@ -45,7 +45,7 @@ const Profile = ({ Name_arg, Nim_arg }: any) => {
   const [isEditKPModalOpen, setIsEditKPModalOpen] = useState(false);
   const [itemToDelete, setItemToDelete] = useState<any>(null);
 
-  const [seminar, setSeminar] = useState<Seminar[]>([]);
+  const [seminar, setSeminar] = useState<any[]>([{user_id:"0",_id:"0",title: "Loading...",details:"Loading..."}]);
   const { logout, _id, authLoad, name, nim } = useAuth()
 
 
@@ -66,7 +66,7 @@ const Profile = ({ Name_arg, Nim_arg }: any) => {
       }
     }, [authLoad])
 
-  const [KerjaPraktik, setKerjaPraktik] = useState<KerjaPraktik[]>([]);
+  const [KerjaPraktik, setKerjaPraktik] = useState<any[]>([{user_id:"0",_id:"0",title: "Loading...",details:"Loading..."}]);
   useEffect(
     () => {
       if (!authLoad) {
